@@ -260,24 +260,21 @@
       \begin{itemize}
         \item 筑波大学 情報学群 情報科学類卒（2011-15,学士）
         \begin{itemize}
-          \item プログラム論理研究室でシステムの研究
+          \item プログラム論理研究室で型システムの研究
         \end{itemize}
-        
-        \item ドワンゴ ニコニコ動画 アカウントチーム
 
         \item スタディサプリENGLISH バックエンド（Scala）
 
         \item 未踏ターゲット2018（ゲート式量子コンピュータ）
 
         \item CTF（\url{https://urandom.team/}）
-        \begin{itemize}
-          \item SECCON CTF 2022で世界57位（国内20位）
-        \end{itemize}
+
+        \item iOS・macOS向けコーヒー抽出支援アプリ\ce{:coffee:}
 
         \item プログラミング
         \begin{itemize}
-          \item Scala, \LaTeX, Rust, Go, Swift
-          \item \SATySFi のバージョン\texttt{0.1.0}待ってます！\ce{:pray:}    
+          \item Scala, \LaTeX, Rust, Swift
+          \item \SATySFi のバージョン\texttt{0.1.0}待ってます！\ce{:pray:}
         \end{itemize}
       \end{itemize}
     \end{column}
@@ -299,36 +296,49 @@
     \item \emph{Covert Lottery}は\cite{covert_lottery_2021}で提案された、ちょっと変わった抽選
   \end{itemize}
 
+  \pause
   \begin{shadequote}[r]{}
     \begin{center}
       参加者2人が1bit（= $0$ or $1$）のいずれかの希望があるとき、
       \begin{enumerate}
-        \item 二人の希望が別々であれば、そのとおりになる
+        \item 二人の希望が一致していれば、それが採用される
         \item 衝突していたらランダムにする
       \end{enumerate}
     \end{center}
   \end{shadequote}
 
-  \simplecallout[{\Large\ce{:thinking:}}]{+}{cyan!10}{いったい何に使えるのか？}
+  \pause
+  \simplecallout[{\LARGE\ce{:thinking:}}]{+}{cyan!10}{{\LARGE いったい何に使えるのか？}}
 \end{frame}
 
 \begin{frame}
-  \frametitle{奢り・割勘問題}
+  \frametitle{%
+    奢り・割り勘問題\footnote{%
+      \cite{covert_lottery_2021}では将棋などの先攻・後攻を決める問題を例にしている。%
+    }%
+  }
 
-  \begin{figure}[h]
-    \includegraphics[width=0.65\textwidth]{./img/twitter.png}\cite{Y_N_Hoshi}
-  \end{figure}
+  \begin{columns}
+    \begin{column}{0.7\textwidth}
+      \begin{figure}[h]
+        \includegraphics[width=0.9\textwidth]{./img/twitter.png}\cite{Y_N_Hoshi}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      \simplecallout[{\LARGE\ce{:sunglasses:}}]{+}{green!10}{{\large\ce{:point_left:}これか！？}}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{奢り・割勘問題}
+  \frametitle{奢り・割り勘問題}
 
   \begin{shadequote}[r]{}
     \begin{center}
       アリスとボブの飲食費について下記のいずれにするか決定する問題
       \begin{enumerate}
         \item ボブが全額を奢る
-        \item 割勘とする
+        \item 割り勘とする
       \end{enumerate}
     \end{center}
   \end{shadequote}
@@ -357,16 +367,22 @@
 \section{古典Covert Lottery}
 
 \begin{frame}
-  \frametitle{カードを用いた古典Covert Lottery}
-  
+  \frametitle{%
+    カードを用いた古典Covert Lottery\protect\footnote{%
+      \cite{covert_lottery_2021}では3人以上への拡張も踏まえてやや複雑な方法が説明されており、
+      このプロトコルは発表者が2人を前提に独自に簡略化したものとなっている。%
+    }
+  }
+  次のように物理的なカード\footnote{%
+    これらのカードはトランプのようにいずれも裏が\commitedcard となっており、
+    裏向きになった状態でどちらのカードなのか特定することができない。%
+  }を用いて行う。
+
   \pause
   \begin{columns}
     \begin{column}{0.6\textwidth}
       \begin{enumerate}
-        \item アリス・ボブに2枚のカード\heartcard,\clubcard を配る\footnote{%
-          これらのカードはトランプのようにいずれも裏が\commitedcard となっており、
-          裏向きになった状態でどちらのカードなのか特定することができない
-        }
+        \item アリス・ボブに2枚のカード\heartcard,\clubcard を配る
         \item アリス・ボブは表\ref{tbl:card_meaning}に従って
         希望を裏向き\commitedcard にして提出する\label{enum:cards_commited}
 
@@ -385,7 +401,7 @@
           \hline
           カード & 意味 \\ \hline
           \heartcard & ボブの奢り \\ \hline
-          \clubcard & 割勘 \\ \hline
+          \clubcard & ▼割り勘 \\ \hline
         \end{tabularx}
       \end{table}
     \end{column}
@@ -445,6 +461,28 @@
   \end{itemize}
 \end{frame}
 
+\section{Quantum Covert Lottery}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item 量子ビットなどの基本説明
+
+    \item Quantum Covert Lotteryの説明
+
+    \item Qiskitによるシミュレーション
+  \end{itemize}
+\end{frame}
+
+\section{Covert Lotteryと情報リーク}
+
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
   \frametitle{コイントスとAND計算のハイブリッドプロトコル}
 
@@ -468,8 +506,8 @@
       \uncover<+->{
         \alicecallout{+}{%
           逆にアリスが不本意に\\
-          割勘となってしまった場合、\\
-          ボブの希望は割勘だと特定する
+          割り勘となってしまった場合、\\
+          ボブの希望は割り勘だと特定する
         }
       }
 
@@ -483,9 +521,9 @@
     \begin{column}{0.4\textwidth}
       \uncover<+(-2)->{
         \begin{itemize}
-          \item アリスが不本意に割勘となった場合、
-          アリスは奢りを希望していたがボブは割勘を希望しており、
-          ランダムで割勘となった
+          \item アリスが不本意に割り勘となった場合、
+          アリスは奢りを希望していたがボブは割り勘を希望しており、
+          ランダムで割り勘となった
 
           \item<2-> このように希望通りになった側は相手の希望が分からず、
           希望通りにならかった側は相手の希望を知ることができる
@@ -502,7 +540,7 @@
 
   \pause
   \begin{itemize}
-    \item<+-> 簡単なプロトコルで奢り・割勘問題に決着をつけられるかもしれない
+    \item<+-> 簡単なプロトコルで奢り・割り勘問題に決着をつけられるかもしれない
     \begin{itemize}
       \item 2人の参加者は安目・高目と情報を賭博する
     \end{itemize}
