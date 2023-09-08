@@ -321,7 +321,7 @@
   \begin{columns}
     \begin{column}{0.7\textwidth}
       \begin{figure}[h]
-        \includegraphics[width=0.9\textwidth]{./img/twitter.png}\cite{Y_N_Hoshi}
+        \includegraphics[width=0.85\textwidth]{./img/twitter.png}\cite{Y_N_Hoshi}
       \end{figure}
     \end{column}
     \begin{column}{0.3\textwidth}
@@ -376,7 +376,7 @@
   次のように物理的なカード\footnote{%
     これらのカードはトランプのようにいずれも裏が\commitedcard となっており、
     裏向きになった状態でどちらのカードなのか特定することができない。%
-  }を用いて行う。
+  }を用いて行う
 
   \pause
   \begin{columns}
@@ -401,7 +401,7 @@
           \hline
           カード & 意味 \\ \hline
           \heartcard & ボブの奢り \\ \hline
-          \clubcard & ▼割り勘 \\ \hline
+          \clubcard & 割り勘 \\ \hline
         \end{tabularx}
       \end{table}
     \end{column}
@@ -425,12 +425,7 @@
 
     \item<+-> これらをシャッフルして1枚選んだときは必ず\heartcard となる
 
-    \item<+-> そしてこのときアリス・ボブは相手のカードについて
-    \begin{itemize}
-      \item 両方とも\heartcard だったのか
-      \item 相手は\clubcard だったがランダムで\heartcard が選ばれたのか
-    \end{itemize}
-    \ce{:point_up:}のどちらなのか分からず、情報リークはない
+    \item<+-> 2人の希望が一致していればこのように必ずそちらが選ばれる
   \end{itemize}
 \end{frame}
 
@@ -450,14 +445,10 @@
 
     \item<+-> これらをシャッフルしてランダムに選べば、結果は\heartcard,\clubcard それぞれ$\frac{1}{2}$の確率になる
     \begin{description}
-      \item[結果が\heartcard]<+->\mbox{}\\
-      \begin{itemize}
-        \item アリスの希望通りとなるが、結果がボブの希望通りかランダムか不明
-        \item ボブは衝突してアリスの希望\heartcard になったと特定
-      \end{itemize}
-
-      \item[結果が\clubcard]<+-> 同様
+      \item[結果が\heartcard]<+-> アリスの希望どおり
+      \item[結果が\clubcard]<+-> ボブの希望どおり
     \end{description}
+    このように2つの結果がそれぞれ50\%のランダムとなる
   \end{itemize}
 \end{frame}
 
