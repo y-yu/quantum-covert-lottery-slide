@@ -22,6 +22,8 @@
 \usepackage{xpatch}
 \usepackage{multicol}
 \usepackage{tabularx}
+\usepackage{braket}
+\usepackage{blochsphere}
 \usepackage{bxtexlogo}
 \bxtexlogoimport{SATySFi}
 
@@ -233,6 +235,26 @@
 \newcommand\bobcallout[2]{
   \simplecallout[{\includegraphics[width=\facesize]{./img/bob_face.png}}]{#1}{orange!10}{#2}
 }
+
+
+\newcommand{\Zero}{\left(
+    \begin{array}{c}
+      1 \\
+      0
+    \end{array}
+  \right)}
+
+\newcommand{\One}{\left(
+    \begin{array}{c}
+      0 \\
+      1
+    \end{array}
+  \right)}
+
+\newcommand{\天国}{\textcolor{cyan}{\ket{\text{天国}}}}
+\newcommand{\地獄}{\textcolor{cyan}{\ket{\text{地獄}}}}
+\newcommand{\生}{\textcolor{orange}{\ket{\text{生}}}}
+\newcommand{\死}{\textcolor{orange}{\ket{\text{死}}}}
 
 \begin{document}
 
@@ -452,16 +474,249 @@
   \end{itemize}
 \end{frame}
 
-\section{Quantum Covert Lottery}
+\section{量子コンピュータとシュレディンガーの猫}
 
 \begin{frame}
-  \tableofcontents[currentsection]
+  \frametitle{量子コンピュータとシュレディンガーの猫}
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \tableofcontents[currentsection]
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+        \item このCovert Lotteryをカードではなくて量子コンピュータでやりたい
+
+        \item その前にまずは量子コンピュータの基礎的なところを解説
+      \end{itemize}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
-  \begin{itemize}
-    \item 量子ビットなどの基本説明
+  \frametitle{量子コンピュータ}
 
+  \begin{itemize}
+    \item 古典コンピュータは1bitで\heartcard,\clubcard のような2つの値しか持たない
+
+    \item 一方で量子コンピュータのbitに相当する\emph{qubit}は2つの複素数$c_0, c_1$によって次のように拡張される
+    \begin{align}
+      c_0\ket{\heartcard} + c_1\ket{\clubcard} \label{eq:qubit}
+    \end{align}
+
+    \item このとき$\ket{\heartcard}, \ket{\clubcard}$は$c_0, c_1$は次のようになる
+    \begin{description}
+      \item[$\ket{\heartcard}$] $c_0 = 1, c_1 = 0$
+      \item[$\ket{\clubcard}$] $c_0 = 0, c_1 = 1$
+    \end{description}
+
+    % \item たとえば$\ket{\heartcard} = \Zero, \ket{\clubcard} = \One$のように行列で表せる
+    % \[
+    %   c_0\Zero + c_1\One = \left(
+    %     \begin{array}{c}
+    %       c_0 \\
+    %       c_1
+    %     \end{array}
+    %   \right)
+    % \]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{量子コンピュータ}
+
+  \[
+    c_0\ket{\heartcard} + c_1\ket{\clubcard} \tag{\ref{eq:qubit}}
+  \]
+  \begin{itemize}
+    \item 式\ref{eq:qubit}の複素数$c_0, c_1$は\emph{確率振幅}と呼ばれ、
+    次のように$\ket{\heartcard}, \ket{\clubcard}$が観測される確率を得ることができる
+    \begin{description}
+      \item[$\ket{\heartcard}$が観測される確率] $|c_0|^2$
+      \item[$\ket{\clubcard}$が観測される確率] $|c_1|^2$
+    \end{description}
+
+    \item 確率なので、$c_0, c_1$は次の条件式\ref{eq:probability_amplitude_constraint}を満す
+    \begin{align}
+      |c_0|^2 + |c_1|^2 = 1 \label{eq:probability_amplitude_constraint}
+    \end{align}
+
+    \item 一方で$c_0, c_1$の具体的な値を直接知る方法はない
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{ブロッホ球}
+
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+        \item 複素数は実数$a, b$を用いて$a + b\sqrt{-1}$のように表現される
+    
+        \item 1qubitの表現に2つの複素数$c_0, c_1$が必要なので、4変数の自由度があるが
+        下記2つの条件により\textbf{半径1の球の表面座標}と考えることができる
+        \begin{enumerate}
+          \item 確率の満す条件式\ref{eq:probability_amplitude_constraint}
+          \item $c_0$が実数になるように$c_1$を調整してもいい
+          （同じとみなせるqubitが存在する）
+        \end{enumerate}
+
+        \item この球のことを\textbf{ブロッホ球}と呼び、
+        たとえば$\ket{\heartcard}$や$\ket{\clubcard}$はそれぞれ
+        球の北極と南極の座標に対応する
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0]
+          \drawBallGrid[style={opacity=0.2}]{40}{40}
+      
+          \drawAxis[style={cyan}]{0}{0};
+          \drawAxis[style={orange}]{90}{0};
+          
+          \labelLatLon{up}{90}{0};
+          \labelLatLon{down}{-90}{90};
+          \labelLatLon{left}{0}{0};
+          \labelLatLon{right}{180}{0};
+          \node[above] at (up) {$\ket{\heartcard}$};
+          \node[below] at (down) {$\ket{\clubcard}$};
+        \end{blochsphere}
+        \caption{ブロッホ球}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{シュレディンガーの猫}
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \begin{blochsphere}[radius=0.38\textwidth, tilt=15,rotation=-20,opacity=0]
+          \drawBallGrid[style={opacity=0.2}]{40}{40}
+      
+          \drawAxis[style={cyan}]{0}{0};
+          \drawAxis[style={orange}]{90}{0};
+          
+          \labelLatLon{up}{90}{0};
+          \labelLatLon{down}{-90}{90};
+          \labelLatLon{left}{0}{0};
+          \labelLatLon{right}{180}{0};
+          \node[above] at (up) {$\ket{\heartcard}$};
+          \node[below] at (down) {$\ket{\clubcard}$};
+          \node[above] at (left) {$\ket{+}$};
+          \node[above] at (right) {$\ket{-}$};
+        \end{blochsphere}
+        \caption{ブロッホ球上の$\ket{\pm}$}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+        \item ``シュレディンガーの猫''で有名なように、qubitは複素数を用いて
+        次のようなブロッホ球の赤道上の座標を表現することもできる
+
+        \item たとえば$c_0 = \frac{1}{\sqrt{2}}, c_1 = \pm\frac{1}{\sqrt{2}}$として
+        次のような2つのqubitを考える
+        \begin{align*}
+          \ket{+} &\equiv \frac{1}{\sqrt{2}}\left(\ket{\heartcard} + \ket{\clubcard}\right) \\
+          \ket{-} &\equiv \frac{1}{\sqrt{2}}\left(\ket{\heartcard} - \ket{\clubcard}\right)
+        \end{align*}
+
+        \item これらは$\ket{\heartcard}, \ket{\clubcard}$が観測される確率が
+        いずれも$\left|\pm\frac{1}{\sqrt{2}}\right|^2 = \frac{1}{2}$になる
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{qubitの測定}
+
+  \begin{itemize}
+    \item 簡単のために、これまではqubitの測定は基底として$\left\{\ket{\heartcard}, \ket{\clubcard}\right\}$を
+    前提としていた
+
+    \item 実は直交基底（内積が$0$）であればよく、$\{\ket{+}, \ket{-}\}$でも測定ができる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{公平性の説明}
+
+  \pause
+  \begin{itemize}
+    \item<+-> 参加者は送信する量子ビットを次の中から選択する
+  \end{itemize}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{table}[h]
+        \footnotesize
+        \begin{tabular}{|c|c|c|}
+          \hline
+          \diagbox{$a$}{$x$} & $0$       & $1$    \\ \hline
+          $0$                & $\天国$    & $\地獄$ \\ \hline
+          $1$                & $\生$      & $\死$  \\ \hline
+        \end{tabular}
+      \end{table}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}[h]
+        \footnotesize
+        \begin{blochsphere}[radius=0.15\textwidth, tilt=15,rotation=-20,opacity=0]
+          \drawBallGrid[style={opacity=0.2}]{40}{40}
+       
+          \drawAxis[style={cyan}]{0}{0};
+          \drawAxis[style={orange}]{90}{0};
+           
+          \labelLatLon{up}{72}{0};
+          \labelLatLon{down}{-108}{90};
+          \labelLatLon{left}{0}{0};
+          \labelLatLon{right}{180}{0};
+          \node[above] at (up) {$\天国$};
+          \node[below] at (down) {$\地獄$};
+          \node[above] at (left) {$\生$};
+          \node[above] at (right) {$\死$};
+        \end{blochsphere}
+      \end{figure}
+    \end{column}
+  \end{columns}
+
+  \begin{columns}
+    \begin{column}{0.1\textwidth}
+      \uncover<4->{
+        \includegraphics[width=\textwidth]{img/cat_russian_blue.png}
+      }
+    \end{column}
+    \begin{column}{0.9\textwidth}
+      \begin{itemize}
+        \item<+-> 図のように$a$が同じ（= 色が同じ）なら直交する
+       
+        \item<+-> たとえば量子ビット$\地獄$の測定を考える
+        \begin{description}
+          \begin{columns}
+            \begin{column}{0.4\textwidth}            
+              \item[$\{\天国, \地獄\}$で測定した場合]\mbox{}\\
+              常に$\地獄$が出力
+            \end{column}
+            \begin{column}{0.45\textwidth}           
+               \item[$\{\生, \死\}$で測定した場合]\mbox{}\\
+               $\生, \死$のいずれかが確率で出力
+            \end{column}
+          \end{columns}
+        \end{description}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\section{Quantum Covert Lottery}
+
+\begin{frame}
+  \frametitle{Quantum Covert Lottery}
+
+  \begin{itemize}
     \item Quantum Covert Lotteryの説明
 
     \item Qiskitによるシミュレーション

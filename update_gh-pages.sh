@@ -4,6 +4,14 @@ set -eo
 
 TARGET="quantum_covert_lottery"
 
+if [[ ! $(git rev-parse --verify gh-pages 2>/dev/null) ]]; then
+  git checkout --orphan gh-pages
+  git rm -rf .
+  git clean -fxd
+  git commit --allow-empty -m 'Dummy commit'
+  git checkout master
+fi
+
 make
 
 if [ $? != 0 ]; then
