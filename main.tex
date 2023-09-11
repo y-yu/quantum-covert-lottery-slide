@@ -499,7 +499,8 @@
   \begin{itemize}
     \item 古典コンピュータは1bitで\heartcard,\clubcard のような2つの値しか持たない
 
-    \item 一方で量子コンピュータのbitに相当する\emph{qubit}は2つの複素数$c_0, c_1$によって次のように拡張される
+    \item 一方で量子コンピュータの1bitに相当する\emph{1qubit}（量子ビット）は
+    2つの複素数$c_0, c_1$によって式\ref{eq:qubit}のように拡張される
     \begin{align}
       c_0\ket{\heartcard} + c_1\ket{\clubcard} \label{eq:qubit}
     \end{align}
@@ -529,7 +530,7 @@
     c_0\ket{\heartcard} + c_1\ket{\clubcard} \tag{\ref{eq:qubit}}
   \]
   \begin{itemize}
-    \item 式\ref{eq:qubit}の複素数$c_0, c_1$は\emph{確率振幅}と呼ばれ、
+    \item 式\ref{eq:qubit}の複素数$c_0, c_1$は\textbf{確率振幅}と呼ばれ、
     次のように$\ket{\heartcard}, \ket{\clubcard}$が観測される確率を得ることができる
     \begin{description}
       \item[$\ket{\heartcard}$が観測される確率] $|c_0|^2$
@@ -554,7 +555,7 @@
         \item 複素数は実数$a, b$を用いて$a + b\sqrt{-1}$のように表現される
     
         \item 1qubitの表現に2つの複素数$c_0, c_1$が必要なので、4変数の自由度があるが
-        下記2つの条件により\textbf{半径1の球の表面座標}と考えることができる
+        下記2つの条件により\textbf{球の表面座標}と考えることができる
         \begin{enumerate}
           \item 確率の満す条件式\ref{eq:probability_amplitude_constraint}
           \item $c_0$が実数になるように$c_1$を調整してもいい
@@ -568,11 +569,10 @@
     \end{column}
     \begin{column}{0.4\textwidth}
       \begin{figure}
-        \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0]
-          \drawBallGrid[style={opacity=0.2}]{40}{40}
+        \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0.02]
+          \drawBallGrid[style={opacity=0.1}]{40}{40}
       
           \drawAxis[style={cyan}]{0}{0};
-          \drawAxis[style={orange}]{90}{0};
           
           \labelLatLon{up}{90}{0};
           \labelLatLon{down}{-90}{90};
@@ -593,11 +593,12 @@
   \begin{columns}
     \begin{column}{0.4\textwidth}
       \begin{figure}
-        \begin{blochsphere}[radius=0.38\textwidth, tilt=15,rotation=-20,opacity=0]
-          \drawBallGrid[style={opacity=0.2}]{40}{40}
+        \begin{blochsphere}[radius=0.38\textwidth, tilt=15,rotation=-20,opacity=0.02]
+          \drawBallGrid[style={opacity=0.1}]{40}{40}
       
           \drawAxis[style={cyan}]{0}{0};
           \drawAxis[style={orange}]{90}{0};
+          \drawCircle[style={red}]{0}{-90};
           
           \labelLatLon{up}{90}{0};
           \labelLatLon{down}{-90}{90};
@@ -613,11 +614,11 @@
     \end{column}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item ``シュレディンガーの猫''で有名なように、qubitは複素数を用いて
-        次のようなブロッホ球の赤道上の座標を表現することもできる
+        \item ``シュレディンガーの猫''で有名なように、量子ビットは$\ket{\heartcard}$と$\ket{\clubcard}$の
+        ``混ざった''ような状態を表現できる
 
         \item たとえば$c_0 = \frac{1}{\sqrt{2}}, c_1 = \pm\frac{1}{\sqrt{2}}$として
-        次のような2つのqubitを考える
+        次のような2つの量子ビット$\ket{\pm}$を考える
         \begin{align*}
           \ket{+} &\equiv \frac{1}{\sqrt{2}}\left(\ket{\heartcard} + \ket{\clubcard}\right) \\
           \ket{-} &\equiv \frac{1}{\sqrt{2}}\left(\ket{\heartcard} - \ket{\clubcard}\right)
@@ -625,20 +626,68 @@
 
         \item これらは$\ket{\heartcard}, \ket{\clubcard}$が観測される確率が
         いずれも$\left|\pm\frac{1}{\sqrt{2}}\right|^2 = \frac{1}{2}$になる
+        %\begin{itemize}
+        %  \item したがってシュレディンガーの猫はブロッホ球の赤道上の座標に相当する状態である
+        %\end{itemize}
       \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}
-  \frametitle{qubitの測定}
+  \frametitle{量子ビットの測定}
 
-  \begin{itemize}
-    \item 簡単のために、これまではqubitの測定は基底として$\left\{\ket{\heartcard}, \ket{\clubcard}\right\}$を
-    前提としていた
+  \begin{columns}
+    \begin{column}{0.2\textwidth}
+      \begin{figure}
+        \begin{blochsphere}[radius=0.6\textwidth, tilt=15,rotation=-20,opacity=0.02]
+          \drawBallGrid[style={opacity=0.1}]{40}{40}
+      
+          \drawAxis[style={cyan}]{0}{0};
+          \drawAxis[style={orange}]{90}{0};
+          \drawCircle[style={red}]{0}{-90};
+          
+          \labelLatLon{up}{90}{0};
+          \labelLatLon{down}{-90}{90};
+          \labelLatLon{left}{0}{0};
+          \labelLatLon{right}{180}{0};
+          \node[above] at (up) {$\ket{\heartcard}$};
+          \node[below] at (down) {$\ket{\clubcard}$};
+          \node[above] at (left) {$\ket{+}$};
+          \node[above] at (right) {$\ket{-}$};
+        \end{blochsphere}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.8\textwidth}
+      \begin{itemize}
+        \item 量子ビットの確率振幅を直接知ることはできない
 
-    \item 実は直交基底（内積が$0$）であればよく、$\{\ket{+}, \ket{-}\}$でも測定ができる
-  \end{itemize}
+        \item 量子ビットの測定結果は測定に用いる\textbf{計算基底}によって変わる
+        \begin{enumerate}
+          \item ブロッホ球の赤道にある$\ket{+}$は
+          %、測定の仕方によってたとえば次のように観測結果が異なる
+          \begin{description}
+            \item[$\{\ket{\heartcard}, \ket{\clubcard}\}$で測定した時]
+            $\ket{\heartcard}, \ket{\clubcard}$のいずれかが$\frac{1}{2}$で観測される
+
+            \item[$\{\ket{+}, \ket{-}\}$で測定した時]
+            $\ket{+}$が確率100\%で観測される
+          \end{description}
+
+          \item 一方でブロッホ球の北極にある$\ket{\heartcard}$は
+          \begin{description}
+            \item[$\{\ket{\heartcard}, \ket{\clubcard}\}$で測定した時]
+            $\ket{\heartcard}$が確率100\%で観測される
+
+            \item[$\{\ket{+}, \ket{-}\}$で測定した時]
+            $\ket{\pm}$のいずれかが$\frac{1}{2}$で観測される
+          \end{description}
+        \end{enumerate}
+
+        \item 量子ビットを収束させる対象はこのように測定時に選ぶことができる
+      \end{itemize}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
