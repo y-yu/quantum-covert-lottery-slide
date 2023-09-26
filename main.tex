@@ -1,3 +1,5 @@
+\RequirePackage{luatex85}
+
 % for notes environment
 \usepackage{xsavebox}
 \usepackage{hyperref}
@@ -22,9 +24,11 @@
 \usepackage{xpatch}
 \usepackage{multicol}
 \usepackage{tabularx}
-\usepackage{braket}
+\usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{blochsphere}
 \usepackage{bxtexlogo}
+\usepackage[braket, qm]{qcircuit}
 \bxtexlogoimport{SATySFi}
 
 \usetikzlibrary{fit}
@@ -505,7 +509,8 @@
       c_0\ket{\heartcard} + c_1\ket{\clubcard} \label{eq:qubit}
     \end{align}
 
-    \item このとき$\ket{\heartcard}, \ket{\clubcard}$は$c_0, c_1$は次のようになる
+    \item 古典コンピュータの1bitと同じ$\ket{\heartcard}, \ket{\clubcard}$のとき、
+    $c_0, c_1$はそれぞれ次のようになる
     \begin{description}
       \item[$\ket{\heartcard}$] $c_0 = 1, c_1 = 0$
       \item[$\ket{\clubcard}$] $c_0 = 0, c_1 = 1$
@@ -688,7 +693,20 @@
       \end{itemize}
     \end{column}
   \end{columns}
-\end{frame}o
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \scalebox{1.0}{
+    \Qcircuit @C=1.0em @R=0.2em @!R {
+      \lstick{\ket{q_0}} & \gate{H} & \gate{S} & \ctrl{1} & \gate{S} & \gate{H} & \meter  & \control \cw \\
+      \lstick{\ket{q_1}} & \gate{H} & \qw      & \gate{Z} & \ctrl{1} & \qw      & \qw     & \gate{X}\cwx & \meter & \rstick{\cdots\; c_1} \\
+      \lstick{\ket{q_2}} & \gate{H} & \qw      & \qw      & \gate{Z} & \gate{H} & \qw     & \gate{X}\cwx & \meter & \rstick{\cdots\; c_2}
+    }}
+    \caption{量子Covert Lotteryの回路}
+  \end{figure}
+\end{frame}
 
 \begin{frame}
   \frametitle{公平性の説明}
@@ -863,40 +881,3 @@
 \end{frame}
 
 \end{document}
-
-先手 = 1
-後手 = 0
-
-
-1. アリスがSゲートをいれて（x = 1）、Zゲートはいれてない（a = 0 …… 後手）
-    i. ボブはSゲートをいれずに1 qubit目を{|+>, |->}で測定（b = 1 …… 先手） …… ランダム（測定結果 => x'）
-      a. 1 qubitの測定が0
-        1. ボブはこれをアリスへ通知
-        2. アリスがx = 1をボブへ通知
-        3. ボブは2 qubit目を{SH|0>, SH|1>}で測定
-      b. 1 qubitの測定が1
-        1. ボブはこれをアリスへ通知
-        2. アリスがx = 1をボブへ通知
-        3. ボブは2 qubit目を{SHX|0>, SHX|1>}で測定
-
-2. アリスがSゲートをいれず（x = 0）、Zゲートはいれてない（a = 0 …… 後手）
-  i. ボブはSゲートをいれて1 qubit目を{S|+>, S|->}で測定（b = 1 …… 先手） …… ランダム（測定結果 => x'）
-    a. 1 qubitの測定が0
-      1. ボブはこれをアリスへ通知
-      2. アリスがx = 0をボブへ通知
-      3. ボブは2 qubit目を{SH|0>, SH|1>}で測定
-    b. 1 qubitの測定が1
-      1. ボブはこれをアリスへ通知
-      2. アリスがx = 1をボブへ通知
-      3. ボブは2 qubit目を{SHX|0>, SHX|1>}で測定
-
-3. アリスがSゲートをいれて（x = 1）、Zゲートはいれてない（a = 1 …… 先手）
-  i. ボブはSゲートをいれずに1 qubit目を{|+>, |->}で測定（b = 1 …… 先手） …… ランダム（測定結果 => x'）
-    a. 1 qubitの測定が0
-      1. ボブはこれをアリスへ通知
-      2. アリスがx = 1をボブへ通知
-      3. ボブは2 qubit目を{SH|0>, SH|1>}で測定
-    b. 1 qubitの測定が1
-      1. ボブはこれをアリスへ通知
-      2. アリスがx = 1をボブへ通知
-      3. ボブは2 qubit目を{SHX|0>, SHX|1>}で測定
