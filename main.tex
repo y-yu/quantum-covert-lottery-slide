@@ -294,6 +294,9 @@
         \item 未踏ターゲット2018（ゲート式量子コンピュータ）
 
         \item CTF（\url{https://urandom.team/}）
+        \begin{itemize}
+          \item SECCON CTF 2023 Quals 72位（国内26位）
+        \end{itemize}
 
         \item iOS・macOS向けコーヒー抽出支援アプリ\ce{:coffee:}
 
@@ -324,13 +327,11 @@
 
   \pause
   \begin{shadequote}[r]{}
-    \begin{center}
-      参加者2人が1bit（= $0$ or $1$）のいずれかの希望があるとき、
-      \begin{enumerate}
-        \item 二人の希望が一致していれば、それが採用される
-        \item 衝突していたらランダムにする
-      \end{enumerate}
-    \end{center}
+    参加者2人が1bit（= $0$ or $1$）のいずれかの希望があるとき、
+    \begin{enumerate}
+      \item 二人の希望が一致していれば、それが採用される
+      \item 衝突していたらランダムにする
+    \end{enumerate}
   \end{shadequote}
 
   \pause
@@ -360,13 +361,11 @@
   \frametitle{奢り・割り勘問題}
 
   \begin{shadequote}[r]{}
-    \begin{center}
-      アリスとボブの飲食費について下記のいずれにするか決定する問題
-      \begin{enumerate}
-        \item ボブが全額を奢る
-        \item 割り勘とする
-      \end{enumerate}
-    \end{center}
+    アリスとボブの飲食費について下記のいずれにするか決定する問題
+    \begin{enumerate}
+      \item ボブが全額を奢る
+      \item 割り勘とする
+    \end{enumerate}
   \end{shadequote}
 
   \begin{columns}
@@ -375,7 +374,7 @@
       \emph{アリス（Alice）}
 
       \begin{figure}[h]
-        \includegraphics[height=0.4\textheight]{img/alice.png}
+        \includegraphics[height=0.35\textheight]{img/alice.png}
       \end{figure}
     \end{column}
    
@@ -384,7 +383,7 @@
       \emph{ボブ（Bob）}
 
       \begin{figure}[h]
-        \includegraphics[height=0.4\textheight]{img/bob.png}
+        \includegraphics[height=0.35\textheight]{img/bob.png}
       \end{figure}
     \end{column}
   \end{columns}
@@ -625,8 +624,10 @@
         \item たとえば$c_0 = \frac{1}{\sqrt{2}}, c_1 = \pm\frac{1}{\sqrt{2}}$として
         次のような2つの量子ビット$\ket{\pm}$を考える
         \begin{align*}
-          \ket{+} &\equiv \frac{1}{\sqrt{2}}\left(\ket{\heartcard} + \ket{\clubcard}\right) \\
-          \ket{-} &\equiv \frac{1}{\sqrt{2}}\left(\ket{\heartcard} - \ket{\clubcard}\right)
+          \left\{\begin{array}{lcl}
+            \ket{+} &\equiv& \frac{1}{\sqrt{2}}\left(\ket{\heartcard} + \ket{\clubcard}\right) \\
+            \ket{-} &\equiv& \frac{1}{\sqrt{2}}\left(\ket{\heartcard} - \ket{\clubcard}\right)
+          \end{array}\right.
         \end{align*}
 
         \item これらは$\ket{\heartcard}, \ket{\clubcard}$が観測される確率が
@@ -672,24 +673,164 @@
           \item ブロッホ球の赤道にある$\ket{+}$は
           %、測定の仕方によってたとえば次のように観測結果が異なる
           \begin{description}
-            \item[$\{\ket{\heartcard}, \ket{\clubcard}\}$で測定した時]
+            \item[$\left\{\ket{\heartcard}, \ket{\clubcard}\right\}$で測定した時]
             $\ket{\heartcard}, \ket{\clubcard}$のいずれかが$\frac{1}{2}$で観測される
 
-            \item[$\{\ket{+}, \ket{-}\}$で測定した時]
+            \item[$\left\{\ket{+}, \ket{-}\right\}$で測定した時]
             $\ket{+}$が確率100\%で観測される
           \end{description}
 
           \item 一方でブロッホ球の北極にある$\ket{\heartcard}$は
           \begin{description}
-            \item[$\{\ket{\heartcard}, \ket{\clubcard}\}$で測定した時]
+            \item[$\left\{\ket{\heartcard}, \ket{\clubcard}\right\}$で測定した時]
             $\ket{\heartcard}$が確率100\%で観測される
 
-            \item[$\{\ket{+}, \ket{-}\}$で測定した時]
+            \item[$\left\{\ket{+}, \ket{-}\right\}$で測定した時]
             $\ket{\pm}$のいずれかが$\frac{1}{2}$で観測される
           \end{description}
         \end{enumerate}
 
         \item 量子ビットを収束させる対象はこのように測定時に選ぶことができる
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\newcommand{\HGateFigure}{%
+  \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0.05]
+    \drawBallGrid[style={opacity=0.1}]{40}{40}
+  
+    \drawAxis[style={cyan}]{0}{0}
+    %\drawAxis[style={orange}]{90}{0}
+    \drawCircle[style={red}]{0}{-90};
+    \drawAxis[style={orange}]{90}{90}
+
+    \labelLatLon{n1}{45}{90}
+    \labelLatLon{n2}{-45}{-90}
+    \draw[->] (n2)--(n1);
+    \drawSmallCircle[style={dashed, thick}]{45}{90}{45}
+    
+    \labelLatLon{x}{0}{90}
+    \labelLatLon{y}{0}{0}
+    \labelLatLon{z}{90}{90}
+    \labelLatLon{down}{-90}{90};
+    
+    \node[above] at (z) {$\ket{\heartcard} = \ket{0}$};
+    \node[below] at (down) {$\ket{\clubcard} = \ket{1}$};
+    %\fill (z) ++(90:4ex) node {$Z$};
+    %\node[above] at (y) {$Y$};
+    \node[below left] at (x) {$\ket{+}$};
+    %\fill (x) ++(180:2em) node {$X$};
+    \node[above] at (n1) {$n$};
+  \end{blochsphere}%
+}
+
+\begin{frame}
+  \frametitle{1量子ビットのシミュレータ実験}
+
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+        \item IBM Quantum Composer\footnote{\url{https://quantum-computing.ibm.com/composer/}}で実際にシミュレーションしてみる
+
+        \item 初期値である$\ket{0}$から$\ket{+}$を作るために\textbf{量子ゲート}を使う
+
+        \item $H$ゲート\footnote{``アダマールゲート''と読みます。}は
+        図\ref{fig:hadamard_center}の$n$を中心に$\pi$回転させるので、
+        $\ket{\heartcard}$が$\ket{+}$へ移る
+
+        \item $\ket{+}$を$\left\{\ket{\heartcard}, \ket{\clubcard}\right\} = \left\{\ket{0}, \ket{1}\right\}$で測定する次のような回路をやってみる
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0} = \ket{\heartcard}} & \gate{H} & \meter
+          }}
+        \end{figure}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \HGateFigure
+        \caption{$H$ゲートの回転中心$n$}
+        \label{fig:hadamard_center}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{1量子ビットのシミュレータ実験}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item 結果は図\ref{fig:hgate_result}のように、
+        $\ket{0} = \ket{\heartcard}$と$\ket{1} = \ket{\clubcard}$が
+        $\frac{1}{2}$の確率でそれぞれ測定されている
+
+        \item これで量子回路としてシュレディンガーの猫が完成\ce{:cat:}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \includegraphics[width=0.95\textwidth]{./img/hgate_histogram.pdf}
+        \caption{$H$ゲート回路の測定結果}
+        \label{fig:hgate_result}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{1量子ビットのシミュレータ実験}
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \HGateFigure
+      \end{figure}
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+        \item $H$ゲートは$n$中心に$\pi$回転なので次のように2回やれば元の$\ket{0}$に戻る
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0} = \ket{\heartcard}} & \gate{H} & \gate{H} & \meter
+          }}
+        \end{figure}
+        \begin{figure}
+          \includegraphics[width=0.95\textwidth]{./img/hgate_hgate_histogram.pdf}
+        \end{figure}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{他の量子ゲート}
+
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \HGateFigure
+      \end{figure}
+    \end{column}
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+        \item $H$ゲートは$n$中心に$\pi$回転なので次のように2回やれば元の$\ket{0}$に戻る
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0} = \ket{\heartcard}} & \gate{H} & \gate{H} & \meter
+          }}
+        \end{figure}
+        \begin{figure}
+          \includegraphics[width=0.95\textwidth]{./img/hgate_hgate_histogram.pdf}
+        \end{figure}
       \end{itemize}
     \end{column}
   \end{columns}
