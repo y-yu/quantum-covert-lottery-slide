@@ -770,6 +770,8 @@
         $\frac{1}{2}$の確率でそれぞれ測定されている
 
         \item これで量子回路としてシュレディンガーの猫が完成\ce{:cat:}
+
+        \item 同様に$H\ket{1} = \ket{-}$かつ$H\ket{-} = \ket{1}$となる
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -873,6 +875,18 @@
         $\pi$回転させるゲート
 
         \item $S$ゲートは$Z$軸を中心に$\frac{\pi}{2}$回転させるゲート
+
+        \item 次がなりたつ
+        \begin{align*}
+          Z\ket{+} &= \ket{-} \\
+          Z\ket{-} &= \ket{+} \\
+          SS\ket{+} &= Z\ket{+} = \ket{-}
+        \end{align*}
+
+        \item $S\ket{\pm}$は$\left\{\ket{\heartcard}, \ket{\clubcard}\right\}$で次のように表現できる
+        \begin{align*}
+          S\ket{\pm} = \frac{1}{\sqrt{2}}\left(\ket{\heartcard} \pm i\ket{\clubcard}\right)
+        \end{align*}
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
@@ -880,10 +894,11 @@
         \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0.05]
           \drawBallGrid[style={opacity=0.1}]{40}{40}
         
-          %\drawAxis[style={cyan}]{0}{0}
-          \drawCircle[style={red}]{0}{-90};
+          \drawAxis[style={blue}]{90}{0}
           \drawAxis[style={orange}]{90}{90}
       
+          \labelLatLon{l}{0}{0}
+          \labelLatLon{r}{180}{0}
           \labelLatLon{n1}{90}{0}
           \labelLatLon{n2}{-90}{0}
           \draw[cyan,->] (n2)--(n1);
@@ -902,6 +917,8 @@
           %\node[above] at (y) {$Y$};
           \node[below left] at (x) {$\ket{+}$};
           \node[above right] at (n3) {$\ket{-}$};
+          \node[right] at (l) {$S\ket{+}$};
+          \node[left] at (r) {$S\ket{-}$};
           %\fill (x) ++(180:2em) node {$X$};
           \node[above] at (n1) {$Z$};
         \end{blochsphere}
@@ -910,6 +927,81 @@
       \end{figure}
     \end{column}
   \end{columns}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{2量子ビットゲート}
+
+  \begin{itemize}
+    \item ここまでは1量子ビットゲートの話だった
+
+    \item 古典コンピュータの\texttt{NAND}ゲートのように、
+    量子コンピュータにも2量子ビットを入力に持つゲートが存在する
+    \begin{itemize}
+      \item ただし\texttt{NAND}ゲートは2入力1出力のように
+      出力が入力よりも少ない（非可逆）となっているが、
+      量子コンピュータのゲートは可逆性が要請されているので
+      入力と出力が常に同じ数となる
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$CZ$ゲート}
+
+  \begin{itemize}
+    \item $CZ$ゲートは2量子ビットを引数にとり
+    \begin{enumerate}
+      \item 1量子ビット目が$\ket{0}$であれば何もせず、
+      \item 一方で1量子ビット目が$\ket{1}$であれば2量子ビット目に$Z$ゲートを作用させる
+    \end{enumerate}
+  \end{itemize}
+
+  \simplecallout[{\LARGE\ce{:thinking:}}]{+}{orange!10}{1量子ビット目が$\ket{+}$だったら？}
+
+  \simplecallout[{\LARGE\ce{:sunglasses:}}]{-}{green!10}{%
+    \begin{minipage}{0.8\textwidth}
+      1量子ビット目を測定して、
+      \begin{description}
+        \item[$\ket{0}$が観測される] なにも起きない
+        \item[$\ket{1}$が観測される] 2量子ビット目に$Z$ゲートが作用する
+      \end{description}
+    \end{minipage}
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{$CZ$ゲート}
+
+  \begin{itemize}
+    \item $CZ$ゲートを次のような量子回路で確認してみる
+    \begin{figure}
+      \centering
+      \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \meter \\
+        \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \gate{H} & \meter
+      }}
+    \end{figure}
+    
+    \item 2量子ビット目の$\ket{0}_2$について考える
+    \begin{enumerate}
+      \item $H$ゲートにより$\ket{+}$となる
+
+      \item $CZ$ゲートによって次のように分岐
+      \begin{enumerate}
+        \item $Z$ゲートが作用しなければ$\ket{+}$のまま
+        \item $Z$ゲートが作用すれば$\ket{-}$となる
+      \end{enumerate}
+
+      \item 最後に$H$ゲートを作用させるが、このとき
+      \begin{enumerate}
+        \item $\ket{+}$であれば$H\ket{+} = \ket{0}$となる
+        \item $\ket{-}$であれば$H\ket{-} = \ket{1}$となる
+      \end{enumerate}
+    \end{enumerate}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
