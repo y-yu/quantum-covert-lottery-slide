@@ -483,10 +483,12 @@
   \frametitle{量子コンピュータとシュレディンガーの猫}
 
   \begin{columns}
-    \begin{column}{0.4\textwidth}
-      \tableofcontents[currentsection]
+    \begin{column}{0.55\textwidth}
+      \begin{minipage}[t][.6\textheight][t]{\textwidth}
+        \tableofcontents[currentsection]
+      \end{minipage}
     \end{column}
-    \begin{column}{0.6\textwidth}
+    \begin{column}{0.45\textwidth}
       \begin{itemize}
         \item このCovert Lotteryをカードではなくて量子コンピュータでやりたい
 
@@ -1039,19 +1041,45 @@
 \begin{frame}
   \frametitle{$CZ$ゲートのシミュレーション結果}
 
+
+  \begin{center}
+    \begin{figure}
+      \includegraphics[width=0.45\textwidth]{./img/cz_gate_histogram.pdf}
+      \caption{%
+        $CZ$ゲートを使った回路のシミュレーション結果%
+        \footnote{図の最下位ビットが1量子ビット目、最上位ビットが2量子ビット目となる。}%
+      }
+    \end{figure}
+  \end{center}
   \begin{itemize}
-    \item
-    \begin{center}
-      \begin{figure}
-        \includegraphics[width=0.45\textwidth]{./img/cz_gate_histogram.pdf}
-        \caption{%
-          $CZ$ゲートを使った回路のシミュレーション結果%
-          \footnote{図の最下位ビットが1量子ビット目、最上位ビットが2量子ビット目となる。}%
-        }
-      \end{figure}
-    \end{center}
-    このように\ce{:point_up:}シミュレーション結果は$\ket{00}$か$\ket{11}$が$\frac{1}{2}$となる\ce{:ok_woman:}
+    \item このように\ce{:point_up:}シミュレーション結果は$\ket{00}$か$\ket{11}$が$\frac{1}{2}$となる\ce{:person_gesturing_ok:}
   \end{itemize}
+\end{frame}
+
+\section{Quantum Covert Lottery}
+
+\begin{frame}
+  \frametitle{Quantum Covert Lottery}
+
+  \begin{columns}
+    \begin{column}{0.55\textwidth}
+      \begin{minipage}[t][.6\textheight][t]{\textwidth}
+        \tableofcontents[currentsection]
+      \end{minipage}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{itemize}
+        \item 量子コンピュータではもっと色々なゲートがあるが、
+        とりあえず量子コンピュータ上でCovert LotteryをやるにはここまでのゲートでOK\ce{:person_gesturing_ok:}
+        \begin{itemize}
+          \item $X, S, Z, H$ゲート
+          \item $CZ$ゲート
+        \end{itemize}
+        
+        \item ここからはこれまで説明した量子ゲートで``Quantum Covert Lottery''を作っていく
+      \end{itemize}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -1065,88 +1093,6 @@
     }}
     \caption{量子Covert Lotteryの回路}
   \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{公平性の説明}
-
-  \pause
-  \begin{itemize}
-    \item<+-> 参加者は送信する量子ビットを次の中から選択する
-  \end{itemize}
-
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \begin{table}[h]
-        \footnotesize
-        \begin{tabular}{|c|c|c|}
-          \hline
-          \diagbox{$a$}{$x$} & $0$       & $1$    \\ \hline
-          $0$                & $\天国$    & $\地獄$ \\ \hline
-          $1$                & $\生$      & $\死$  \\ \hline
-        \end{tabular}
-      \end{table}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \begin{figure}[h]
-        \footnotesize
-        \begin{blochsphere}[radius=0.15\textwidth, tilt=15,rotation=-20,opacity=0]
-          \drawBallGrid[style={opacity=0.2}]{40}{40}
-       
-          \drawAxis[style={cyan}]{0}{0};
-          \drawAxis[style={orange}]{90}{0};
-           
-          \labelLatLon{up}{72}{0};
-          \labelLatLon{down}{-108}{90};
-          \labelLatLon{left}{0}{0};
-          \labelLatLon{right}{180}{0};
-          \node[above] at (up) {$\天国$};
-          \node[below] at (down) {$\地獄$};
-          \node[above] at (left) {$\生$};
-          \node[above] at (right) {$\死$};
-        \end{blochsphere}
-      \end{figure}
-    \end{column}
-  \end{columns}
-
-  \begin{columns}
-    \begin{column}{0.1\textwidth}
-      \uncover<4->{
-        \includegraphics[width=\textwidth]{img/cat_russian_blue.png}
-      }
-    \end{column}
-    \begin{column}{0.9\textwidth}
-      \begin{itemize}
-        \item<+-> 図のように$a$が同じ（= 色が同じ）なら直交する
-       
-        \item<+-> たとえば量子ビット$\地獄$の測定を考える
-        \begin{description}
-          \begin{columns}
-            \begin{column}{0.4\textwidth}            
-              \item[$\{\天国, \地獄\}$で測定した場合]\mbox{}\\
-              常に$\地獄$が出力
-            \end{column}
-            \begin{column}{0.45\textwidth}           
-               \item[$\{\生, \死\}$で測定した場合]\mbox{}\\
-               $\生, \死$のいずれかが確率で出力
-            \end{column}
-          \end{columns}
-        \end{description}
-      \end{itemize}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\section{Quantum Covert Lottery}
-
-\begin{frame}
-  \frametitle{Quantum Covert Lottery}
-
-  \begin{itemize}
-    \item Quantum Covert Lotteryの説明
-
-    \item Qiskitによるシミュレーション
-  \end{itemize}
 \end{frame}
 
 \section{Covert Lotteryと情報リーク}
