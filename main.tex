@@ -975,7 +975,7 @@
   \frametitle{$CZ$ゲート}
 
   \begin{itemize}
-    \item $CZ$ゲートを次のような量子回路で確認してみる
+    \item $CZ$ゲートを次のような量子回路\ref{fig:cz_gate}で確認してみる
     \begin{figure}
       \centering
       \scalebox{1.0}{
@@ -983,6 +983,7 @@
         \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \meter \\
         \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \gate{H} & \meter
       }}
+      \label{fig:cz_gate}
     \end{figure}
     
     \item 2量子ビット目の$\ket{0}_2$について考える
@@ -1001,7 +1002,52 @@
         \item $\ket{-}$であれば$H\ket{-} = \ket{1}$となる
       \end{enumerate}
     \end{enumerate}
+
+    \item 1量子ビット目は$\ket{+}$なので、$\ket{0}, \ket{1}$のどちらかになるかは
+    それぞれ確率$\frac{1}{2}$である
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$CZ$ゲート}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \centering
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \meter \\
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \gate{H} & \meter
+        }}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \simplecallout[{\LARGE\ce{:point_left:}\ce{:thinking:}}]{-}{red!10}{つまりまとめると……}
+    \end{column}
+  \end{columns}
+
+
+  \begin{enumerate}
+    \item 確率$\frac{1}{2}$で1量子ビット目の測定結果が$\ket{0}$なら2量子ビット目も$\ket{0}$
+    \item 確率$\frac{1}{2}$で1量子ビット目の測定結果が$\ket{1}$なら2量子ビット目も$\ket{1}$
+  \end{enumerate}
+
+  \simplecallout[{\LARGE\ce{:eyes:}}]{+}{cyan!10}{シミュレーターでやってみる}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$CZ$ゲートのシミュレーション結果}
+
+  \begin{center}
+    \begin{figure}
+      \includegraphics[width=0.5\textwidth]{./img/cz_gate_histogram.pdf}
+      \caption{%
+        $CZ$ゲートを使った回路のシミュレーション結果%
+        \footnote{図の最下位ビットが1量子ビット目、最上位ビットが2量子ビット目となる。}%
+      }
+    \end{figure}
+  \end{center}
 \end{frame}
 
 \begin{frame}
