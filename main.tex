@@ -1082,6 +1082,35 @@
   \end{columns}
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{プロトコル}
+
+  \begin{enumerate}
+    \item アリスは希望$a \in \{0, 1\}$と乱数$x \in \{0, 1\}$を生成する
+
+    \item アリスは次のような回路で表現される3量子ビットを用意する
+    \begin{figure}
+      \centering
+      \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{a}         & \cw      & \control\cw  & \\
+        \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{1} & \qw      & \qw \\
+        \lstick{\ket{0}_2} & \gate{H} & \qw          & \gate{Z} & \ctrl{1} & \qw \\
+        \lstick{\ket{0}_3} & \gate{H} & \gate{Z}\cwx[1] & \qw      & \gate{Z} & \qw \\
+        \lstick{x}         & \cw      & \control\cw
+      }}
+      \caption{アリスの用意する3量子ビット}
+    \end{figure}
+    \begin{itemize}
+      \item $a = 1$であれば、1量子ビット目に$S$ゲートを作用させる
+      \item $x = 0$であれば、3量子ビット目に$Z$ゲートを作用させる
+    \end{itemize}
+
+  \end{enumerate}
+\end{frame}
+
+
 \begin{frame}
   \begin{figure}
     \centering
