@@ -1041,7 +1041,6 @@
 \begin{frame}
   \frametitle{$CZ$ゲートのシミュレーション結果}
 
-
   \begin{center}
     \begin{figure}
       \includegraphics[width=0.45\textwidth]{./img/cz_gate_histogram.pdf}
@@ -1106,10 +1105,57 @@
       \item $a = 1$であれば、1量子ビット目に$S$ゲートを作用させる
       \item $x = 0$であれば、3量子ビット目に$Z$ゲートを作用させる
     \end{itemize}
-
   \end{enumerate}
 \end{frame}
 
+\begin{frame}
+  \frametitle{プロトコル}
+
+  \begin{enumerate}
+    \item ボブは希望$b \in \{0, 1\}$を選び1量子ビット目と2量子ビット目を測定する
+    \begin{figure}
+      \centering
+      \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{b}         & \cw      & \cw       & \cw      & \control\cw \\
+        \lstick{\ket{0}_1} & \gate{H} & \gate{S?} & \ctrl{1} & \gate{S}\cwx & \gate{H} & \meter & \control \cw \\
+        \lstick{\ket{0}_2} & \gate{H} & \qw       & \gate{Z} & \ctrl{1}     & \qw      & \qw    & \gate{X}\cwx & \meter \\
+        \lstick{\ket{0}_3} & \gate{H} & \gate{Z?} & \qw      & \gate{Z}     & \qw      & \qw    & \gate{X}\cwx
+      }}
+      \caption{アリスの用意する3量子ビット}
+    \end{figure}
+  \end{enumerate}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \simplecallout[{\LARGE\ce{:thinking:}}]{-}{red!10}{これどういうこと？}    
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \simplecallout[{\LARGE\ce{:eyes:}}]{+}{blue!10}{まずは$\ket{0}_1$だけ整理してみる}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{プロトコル}
+  
+  \begin{figure}
+    \centering
+    \scalebox{1.0}{
+    \Qcircuit @C=1.0em @R=0.2em @!R {
+      \lstick{a}         & \cw      & \control\cw \\
+      \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{2} & \gate{S}\cwx[1] & \gate{H} & \meter \\
+      \lstick{b}         & \cw      & \cw          & \cw      & \control\cw \\
+                         &          &              & \dstick{CZ}
+    }}
+    \vspace{2ex}
+    \caption{1量子ビット目とアリス・ボブの希望}
+  \end{figure}
+  
+  \begin{itemize}
+    \item aaa
+  \end{itemize}
+\end{frame}
 
 \begin{frame}
   \begin{figure}
