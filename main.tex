@@ -931,7 +931,6 @@
   \end{columns}
 \end{frame}
 
-
 \begin{frame}
   \frametitle{2量子ビットゲート}
 
@@ -940,12 +939,12 @@
 
     \item 古典コンピュータの\texttt{NAND}ゲートのように、
     量子コンピュータにも2量子ビットを入力に持つゲートが存在する
-    \begin{itemize}
-      \item ただし\texttt{NAND}ゲートは2入力1出力のように
-      出力が入力よりも少ない（非可逆）となっているが、
-      量子コンピュータのゲートは可逆性が要請されているので
-      入力と出力が常に同じ数となる
-    \end{itemize}
+    %\begin{itemize}
+    %  \item ただし\texttt{NAND}ゲートは2入力1出力のように
+    %  出力が入力よりも少ない（非可逆）となっているが、
+    %  量子コンピュータのゲートは可逆性が要請されているので
+    %  入力と出力が常に同じ数となる
+    %\end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -1029,7 +1028,6 @@
     \end{column}
   \end{columns}
 
-
   \begin{enumerate}
     \item 確率$\frac{1}{2}$で1量子ビット目の測定結果が$\ket{0}$なら2量子ビット目も$\ket{0}$
     \item 確率$\frac{1}{2}$で1量子ビット目の測定結果が$\ket{1}$なら2量子ビット目も$\ket{1}$
@@ -1053,6 +1051,127 @@
   \begin{itemize}
     \item このように\ce{:point_up:}シミュレーション結果は$\ket{00}$か$\ket{11}$が$\frac{1}{2}$となる\ce{:person_gesturing_ok:}
   \end{itemize}
+\end{frame}
+
+\section{量子テレポーテーション}
+
+\begin{frame}
+  \frametitle{量子テレポーテーション}
+
+  \begin{itemize}
+    \item 2つの量子ビットが$\ket{+}$のとき$CZ$ゲートの後で
+    \begin{enumerate}
+      \item $Z$軸の回転ゲートを作用させ \label{enum:teleportation_1}
+      \item $H$ゲートを作用させ \label{enum:teleportation_2}
+      \item 測定を行う \label{enum:teleportation_3}
+    \end{enumerate}
+
+    \item たとえば次のような回路\ref{fig:teleportation_circuit}を考える
+    \begin{columns}
+      \begin{column}{0.6\textwidth}
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{Z\ballref{enum:teleportation_1}} & \gate{H\ballref{enum:teleportation_2}} & \meter & \ballref{enum:teleportation_3} \\
+            \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \qw & \meter
+          }}
+          \caption{$CZ$ゲートとテレポーテーション回路}
+          \label{fig:teleportation_circuit}
+        \end{figure}
+      \end{column}
+      \begin{column}{0.4\textwidth}
+        \begin{figure}
+          \includegraphics[width=0.8\textwidth]{./img/cz_teleportation_histogram.pdf}
+          \caption{回路\ref{fig:teleportation_circuit}のシミュレーション結果}
+        \end{figure}
+      \end{column}
+    \end{columns}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{量子テレポーテーション}
+
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      \begin{figure}
+        \centering
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{Z\ballref{enum:teleportation_1}} & \gate{H\ballref{enum:teleportation_2}} & \meter & \ballref{enum:teleportation_3}  \gategroup{1}{5}{1}{4}{.4em}{--} \\
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \qw & \meter
+        }}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \includegraphics[width=0.6\textwidth]{./img/cz_teleportation_histogram.pdf}
+      \end{figure}
+    \end{column}
+  \end{columns}
+
+  \begin{itemize}
+    \item 下記のように1量子ビット目の測定結果に応じて$X$ゲートの有無の差があるものの、
+    $Z$ゲートと$H$ゲートが2量子ビット目へテレポートする
+  \end{itemize}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z\ballref{enum:teleportation_1}} & \gate{H\ballref{enum:teleportation_2}} & \meter
+        }}
+        \caption{1量子ビット目の測定結果が$0$}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z\ballref{enum:teleportation_1}} & \gate{H\ballref{enum:teleportation_2}} & \gate{X} & \meter
+        }}
+        \caption{1量子ビット目の測定結果が$1$}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{量子テレポーテーション}
+
+  \begin{itemize}
+    \item テレポートなので1量子ビット目からは$Z, H$ゲートが消えてしまう
+  \end{itemize}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{H} & \meter \\
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \meter
+        }}
+        \caption{$H$ゲートだけのテレポート}
+        \label{fig:h_gate_teleportation}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \includegraphics[width=0.5\textwidth]{./img/h_gate_teleportation.pdf}
+        \caption{回路\ref{fig:h_gate_teleportation}のシミュレーション結果}
+        \label{fig:h_gate_teleportation_histogram}
+      \end{figure}
+    \end{column}
+  \end{columns}
+
+  \begin{itemize}
+    \item 1量子ビット目は$H$ゲートが2回作用しているので、$CZ$ゲートがなければキャンセルして常に$\ket{0}$となるが、
+    シミュレーション結果\ref{fig:h_gate_teleportation_histogram}では1量子ビット目は$\ket{0},\ket{1}$がランダムとなる
+  \end{itemize}
+
+  \simplecallout{-}{green!10}{量子コンピュータでは量子操作をテレポートさせることができる！}    
 \end{frame}
 
 \section{Quantum Covert Lottery}
@@ -1112,10 +1231,10 @@
         \centering
         \scalebox{1.0}{
         \Qcircuit @C=1.0em @R=0.2em @!R {
-          \lstick{a}         & \cw      & \control\cw  & \\
-          \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{1} & \qw      & \qw \\
-          \lstick{\ket{0}_2} & \gate{H} & \qw          & \gate{Z} & \ctrl{1} & \qw \\
-          \lstick{\ket{0}_3} & \gate{H} & \gate{Z}\cwx[1] & \qw      & \gate{Z} & \qw \\
+          \lstick{a}         & \cw      & \cw             & \control\cw  & \\
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}        & \gate{S}\cwx  & \qw \\
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z}        & \ctrl{1} & \qw \\
+          \lstick{\ket{0}_3} & \gate{H} & \gate{Z}\cwx[1] & \gate{Z} & \qw \\
           \lstick{x}         & \cw      & \control\cw
         }}
         \caption{アリスの用意する3量子ビット}
@@ -1159,10 +1278,10 @@
     \centering
     \scalebox{1.0}{
     \Qcircuit @C=1.0em @R=0.2em @!R {
-      \lstick{b}         & \cw      & \cw       & \cw      & \control\cw \\
-      \lstick{\ket{0}_1} & \gate{H} & \gate{S?} & \ctrl{1} & \gate{S}\cwx & \gate{H} & \meter \\%& \control \cw \\
-      \lstick{\ket{0}_2} & \gate{H} & \qw       & \gate{Z} & \ctrl{1}     & \qw      & \qw    \\%& \gate{X}\cwx & \meter \\
-      \lstick{\ket{0}_3} & \gate{H} & \gate{Z?} & \qw      & \gate{Z}     & \qw      & \qw    %& \gate{X}\cwx
+      \lstick{b}         & \cw      & \cw       & \cw       & \control\cw \\
+      \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}  & \gate{S^?} & \gate{S}\cwx & \gate{H} & \meter \\%& \control \cw \\
+      \lstick{\ket{0}_2} & \gate{H} & \gate{Z}  & \ctrl{1}  & \qw      & \qw    \\%& \gate{X}\cwx & \meter \\
+      \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \gate{Z}  & \qw      & \qw    %& \gate{X}\cwx
     }}
     \caption{ボブが行う量子操作}
     \label{fig:bob_circuit}
@@ -1187,17 +1306,17 @@
       \centering
       \scalebox{1.0}{
       \Qcircuit @C=1.0em @R=0.2em @!R {
-        \lstick{a}         & \cw      & \control\cw \\
-        \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{2} & \gate{S}\cwx[1] & \gate{H} & \meter \\
-        \lstick{b}         & \cw      & \cw          & \cw      & \control\cw \\
-                           &          &              & \dstick{CZ}
+        \lstick{a}         & \cw      & \cw          & \control\cw \\
+        \lstick{\ket{0}_1} & \gate{H} & \ctrl{2}     & \gate{S}\cwx & \gate{S}\cwx[1] & \gate{H} & \meter \\
+        \lstick{b}         & \cw      & \cw          & \cw          & \control\cw \\
+                           &          & \dstick{CZ}
       }}
       \vspace{2ex}
       \caption{1量子ビット目とアリス・ボブの希望}
       \label{fig:1st_qubit}
     \end{figure}
 
-    \item これをアリス・ボブの希望$a, b$で場合わけしてシミュレーションしてみる
+    \item これをアリス・ボブの希望$a, b$で場合わけして考える
   \end{itemize}
 \end{frame}
 
@@ -1212,16 +1331,12 @@
           \centering
           \scalebox{1.0}{
           \Qcircuit @C=1.0em @R=0.2em @!R {
-            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{H} & \meter \\
+            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}    & \gate{H} & \meter \\
                                &          & \dstick{CZ}
           }}
           \vspace{2ex}
           \caption{両者がボブの奢り$a = 0$で一致}
           \label{fig:a_equal_0}
-        \end{figure}
-
-        \begin{figure}
-          \includegraphics[width=0.5\textwidth]{./img/a_0_histogram.pdf}
         \end{figure}
       \end{column}
       \begin{column}{0.5\textwidth}
@@ -1229,22 +1344,24 @@
           \centering
           \scalebox{1.0}{
           \Qcircuit @C=1.0em @R=0.2em @!R {
-            \lstick{\ket{0}_1} & \gate{H} & \gate{S} & \ctrl{1} & \gate{S} & \gate{H} & \meter \\
-                               &          &          & \dstick{CZ}
+            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{S} & \gate{S} & \gate{H} & \meter \\
+                               &          & \dstick{CZ}
           }}
           \vspace{2ex}
           \caption{両者が割り勘$a = 1$で一致}
           \label{fig:a_equal_1}
         \end{figure}
-
-        \begin{figure}
-          \includegraphics[width=0.5\textwidth]{./img/a_1_histogram.pdf}
-        \end{figure}
       \end{column}
     \end{columns}
-  
-    \item このように常に$\ket{0}, \ket{1}$が生じるようになる
+
+    \item $SS = Z$により、次のように2量子ビット目へテレポートするゲートが決まる
+    \begin{description}
+      \item[$a = b = 0$] $H$ゲート（+ $X$ゲート）
+      \item[$a = b = 1$] $H$ゲートと$Z$ゲート（+ $X$ゲート）
+    \end{description}
   \end{itemize}
+
+  \simplecallout{-}{yellow!10}{$S$ゲートが消えているのがポイント！}  
 \end{frame}
 
 \begin{frame}
@@ -1252,41 +1369,21 @@
 
   \begin{itemize}
     \item 一方で、アリス・ボブの希望が一致しないのは$a \ne b$なので次のようになる
-    \begin{columns}
-      \begin{column}{0.6\textwidth}
-        \begin{figure}
-          \centering
-          \scalebox{1.0}{
-          \Qcircuit @C=1.0em @R=0.2em @!R {
-            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{S} & \gate{H} & \meter \\
-                               &          & \dstick{CZ}
-          }}
-          \vspace{2ex}
-          \caption{アリスは奢り・ボブは割り勘$a = 0, b = 1$}
-          \label{fig:a_eq_0_b_eq_1}
-        \end{figure}
-
-        \begin{figure}
-          \centering
-          \scalebox{1.0}{
-          \Qcircuit @C=1.0em @R=0.2em @!R {
-            \lstick{\ket{0}_1} & \gate{H} & \gate{S} & \ctrl{1}    & \gate{H} & \meter \\
-                               &          &          & \dstick{CZ}
-          }}
-          \vspace{2ex}
-          \caption{アリスは割り勘・ボブは奢り$a = 1, b = 0$}
-          \label{fig:a_eq_1_b_eq_0}
-        \end{figure}
-      \end{column}
-      \begin{column}{0.4\textwidth}
-        \begin{figure}
-          \includegraphics[width=0.9\textwidth]{./img/a_ne_b_histogram.pdf}
-        \end{figure}
-      \end{column}
-    \end{columns}
+    \begin{figure}
+      \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}    & \gate{S}  & \gate{H} & \meter \\
+                           &          & \dstick{CZ}
+      }}
+      \vspace{2ex}
+      \caption{アリスは割り勘・ボブは奢り、またはアリスは奢り・ボブは割り勘}
+      \label{fig:a_eq_1_b_eq_0}
+    \end{figure}
   
-    \item いずれも$\ket{0}, \ket{1}$が確率$\frac{1}{2}$で観測される
+    \item いずれも$S$ゲートと$H$ゲートが2量子ビット目へテレポートする
   \end{itemize}
+
+  \simplecallout{+}{yellow!10}{$S$ゲートが2量子ビット目へテレポートされる！}  
 \end{frame}
 
 \begin{frame}
