@@ -19,3 +19,4 @@ vc.tex
 !img/*.pdf
 *plantuml.txt
 *plantuml.latex
+.idea
