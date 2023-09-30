@@ -1081,79 +1081,211 @@
   \end{columns}
 \end{frame}
 
+\newcommand{\CovertTable}{%
+  \begin{tabularx}{0.9\textwidth}{@{}| Y | Y |@{}}
+    \hline
+    希望 & 意味 \\ \hline
+    $0$ & ボブの奢り \\ \hline
+    $1$ & 割り勘 \\ \hline
+  \end{tabularx}%
+}
 
 \begin{frame}
   \frametitle{プロトコル}
 
   \begin{enumerate}
-    \item アリスは希望$a \in \{0, 1\}$と乱数$x \in \{0, 1\}$を生成する
+    \item アリスは表\ref{tbl:covert_meaning}にしたがって希望$a \in \{0, 1\}$と、
+    乱数$x \in \{0, 1\}$を生成する
 
-    \item アリスは次のような回路で表現される3量子ビットを用意する
-    \begin{figure}
-      \centering
-      \scalebox{1.0}{
-      \Qcircuit @C=1.0em @R=0.2em @!R {
-        \lstick{a}         & \cw      & \control\cw  & \\
-        \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{1} & \qw      & \qw \\
-        \lstick{\ket{0}_2} & \gate{H} & \qw          & \gate{Z} & \ctrl{1} & \qw \\
-        \lstick{\ket{0}_3} & \gate{H} & \gate{Z}\cwx[1] & \qw      & \gate{Z} & \qw \\
-        \lstick{x}         & \cw      & \control\cw
-      }}
-      \caption{アリスの用意する3量子ビット}
-    \end{figure}
+    \item アリスは次のような回路\ref{fig:alice_circuit}で表現される3量子ビットを用意する
     \begin{itemize}
       \item $a = 1$であれば、1量子ビット目に$S$ゲートを作用させる
-      \item $x = 0$であれば、3量子ビット目に$Z$ゲートを作用させる
+      \item $x = 1$であれば、3量子ビット目に$Z$ゲートを作用させる
     \end{itemize}
-  \end{enumerate}
-\end{frame}
 
-\begin{frame}
-  \frametitle{プロトコル}
-
-  \begin{enumerate}
-    \item ボブは希望$b \in \{0, 1\}$を選び1量子ビット目と2量子ビット目を測定する
-    \begin{figure}
-      \centering
-      \scalebox{1.0}{
-      \Qcircuit @C=1.0em @R=0.2em @!R {
-        \lstick{b}         & \cw      & \cw       & \cw      & \control\cw \\
-        \lstick{\ket{0}_1} & \gate{H} & \gate{S?} & \ctrl{1} & \gate{S}\cwx & \gate{H} & \meter & \control \cw \\
-        \lstick{\ket{0}_2} & \gate{H} & \qw       & \gate{Z} & \ctrl{1}     & \qw      & \qw    & \gate{X}\cwx & \meter \\
-        \lstick{\ket{0}_3} & \gate{H} & \gate{Z?} & \qw      & \gate{Z}     & \qw      & \qw    & \gate{X}\cwx
-      }}
-      \caption{アリスの用意する3量子ビット}
-    \end{figure}
+    \item 3量子ビットを量子通信回線でボブへ送信する
   \end{enumerate}
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
-      \simplecallout[{\LARGE\ce{:thinking:}}]{-}{red!10}{これどういうこと？}    
+      \begin{figure}
+        \centering
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{a}         & \cw      & \control\cw  & \\
+          \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{1} & \qw      & \qw \\
+          \lstick{\ket{0}_2} & \gate{H} & \qw          & \gate{Z} & \ctrl{1} & \qw \\
+          \lstick{\ket{0}_3} & \gate{H} & \gate{Z}\cwx[1] & \qw      & \gate{Z} & \qw \\
+          \lstick{x}         & \cw      & \control\cw
+        }}
+        \caption{アリスの用意する3量子ビット}
+        \label{fig:alice_circuit}
+      \end{figure}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \simplecallout[{\LARGE\ce{:eyes:}}]{+}{blue!10}{まずは$\ket{0}_1$だけ整理してみる}
+      \begin{table}[h]
+        \caption{希望の意味}
+        \label{tbl:covert_meaning}
+        \CovertTable
+      \end{table}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{プロトコル}
-  
+
+  \begin{columns}
+    \begin{column}{0.6\textwidth}
+      \begin{enumerate}
+        \item ボブはアリスから3量子ビットを受けとる
+        
+        \item ボブは希望$b \in \{0, 1\}$を選び図\ref{fig:bob_circuit}のような量子操作を行う
+        \begin{itemize}
+          \item $b = 1$であれば、1量子ビット目に$S$ゲートを作用させる
+        \end{itemize}
+
+        \item ボブは1量子ビット目に$H$ゲートを作用させたあと測定を行う
+      \end{enumerate}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{table}[h]
+        \CovertTable
+      \end{table}
+    \end{column}
+  \end{columns}
+
   \begin{figure}
     \centering
     \scalebox{1.0}{
     \Qcircuit @C=1.0em @R=0.2em @!R {
-      \lstick{a}         & \cw      & \control\cw \\
-      \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{2} & \gate{S}\cwx[1] & \gate{H} & \meter \\
-      \lstick{b}         & \cw      & \cw          & \cw      & \control\cw \\
-                         &          &              & \dstick{CZ}
+      \lstick{b}         & \cw      & \cw       & \cw      & \control\cw \\
+      \lstick{\ket{0}_1} & \gate{H} & \gate{S?} & \ctrl{1} & \gate{S}\cwx & \gate{H} & \meter \\%& \control \cw \\
+      \lstick{\ket{0}_2} & \gate{H} & \qw       & \gate{Z} & \ctrl{1}     & \qw      & \qw    \\%& \gate{X}\cwx & \meter \\
+      \lstick{\ket{0}_3} & \gate{H} & \gate{Z?} & \qw      & \gate{Z}     & \qw      & \qw    %& \gate{X}\cwx
     }}
-    \vspace{2ex}
-    \caption{1量子ビット目とアリス・ボブの希望}
+    \caption{ボブが行う量子操作}
+    \label{fig:bob_circuit}
   \end{figure}
-  
+\end{frame}
+
+\begin{frame}
+  \frametitle{プロトコル}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \simplecallout{-}{red!10}{これどういうこと？}    
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \simplecallout{+}{blue!10}{まずは$\ket{0}_1$だけ整理してみる}
+    \end{column}
+  \end{columns}
+
   \begin{itemize}
-    \item aaa
+    \item 1量子ビット目とアリス・ボブの希望に注目すると図\ref{fig:1st_qubit}のようになる
+    \begin{figure}
+      \centering
+      \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{a}         & \cw      & \control\cw \\
+        \lstick{\ket{0}_1} & \gate{H} & \gate{S}\cwx & \ctrl{2} & \gate{S}\cwx[1] & \gate{H} & \meter \\
+        \lstick{b}         & \cw      & \cw          & \cw      & \control\cw \\
+                           &          &              & \dstick{CZ}
+      }}
+      \vspace{2ex}
+      \caption{1量子ビット目とアリス・ボブの希望}
+      \label{fig:1st_qubit}
+    \end{figure}
+
+    \item これをアリス・ボブの希望$a, b$で場合わけしてシミュレーションしてみる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{ケーススタディ\ballcircle{1} --- アリス・ボブの希望が一致}
+
+  \begin{itemize}
+    \item アリス・ボブの希望が一致するときというのは$a = b$なので次のようになる
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{H} & \meter \\
+                               &          & \dstick{CZ}
+          }}
+          \vspace{2ex}
+          \caption{両者がボブの奢り$a = 0$で一致}
+          \label{fig:a_equal_0}
+        \end{figure}
+
+        \begin{figure}
+          \includegraphics[width=0.5\textwidth]{./img/a_0_histogram.pdf}
+        \end{figure}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0}_1} & \gate{H} & \gate{S} & \ctrl{1} & \gate{S} & \gate{H} & \meter \\
+                               &          &          & \dstick{CZ}
+          }}
+          \vspace{2ex}
+          \caption{両者が割り勘$a = 1$で一致}
+          \label{fig:a_equal_1}
+        \end{figure}
+
+        \begin{figure}
+          \includegraphics[width=0.5\textwidth]{./img/a_1_histogram.pdf}
+        \end{figure}
+      \end{column}
+    \end{columns}
+  
+    \item このように常に$\ket{0}, \ket{1}$が生じるようになる
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{ケーススタディ\ballcircle{2} --- アリス・ボブの希望が不一致}
+
+  \begin{itemize}
+    \item 一方で、アリス・ボブの希望が一致しないのは$a \ne b$なので次のようになる
+    \begin{columns}
+      \begin{column}{0.6\textwidth}
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{S} & \gate{H} & \meter \\
+                               &          & \dstick{CZ}
+          }}
+          \vspace{2ex}
+          \caption{アリスは奢り・ボブは割り勘$a = 0, b = 1$}
+          \label{fig:a_eq_0_b_eq_1}
+        \end{figure}
+
+        \begin{figure}
+          \centering
+          \scalebox{1.0}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{\ket{0}_1} & \gate{H} & \gate{S} & \ctrl{1}    & \gate{H} & \meter \\
+                               &          &          & \dstick{CZ}
+          }}
+          \vspace{2ex}
+          \caption{アリスは割り勘・ボブは奢り$a = 1, b = 0$}
+          \label{fig:a_eq_1_b_eq_0}
+        \end{figure}
+      \end{column}
+      \begin{column}{0.4\textwidth}
+        \begin{figure}
+          \includegraphics[width=0.9\textwidth]{./img/a_ne_b_histogram.pdf}
+        \end{figure}
+      \end{column}
+    \end{columns}
+  
+    \item いずれも$\ket{0}, \ket{1}$が確率$\frac{1}{2}$で観測される
   \end{itemize}
 \end{frame}
 
@@ -1249,7 +1381,8 @@
 
 \section*{参考文献}
 \begin{frame}[allowframebreaks]
-  \frametitle{参考文献}
+  \frametitle{参考文献}%
+
   \nocite{*}
   \bibliographystyle{junsrt_url}
   \bibliography{ref}
