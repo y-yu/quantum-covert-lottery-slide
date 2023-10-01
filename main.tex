@@ -619,9 +619,6 @@
       \begin{itemize}
         \item<+-> 複素数は実数$a, b$を用いて$a + b\sqrt{-1}$のように表現される
 
-        \item<+-> この球を\textbf{ブロッホ球}と呼び、
-        たとえば$\ket{0}$や$\ket{1}$はそれぞれ球の北極と南極の座標に対応する
-
         \item<+-> 1qubitの表現に2つの複素数$c_0, c_1$が必要なので、4変数の自由度があるが
         下記2つの条件により\textbf{球の表面座標}と考えることができる
         \begin{enumerate}
@@ -629,6 +626,9 @@
           \item $c_0$が実数になるように$c_1$を調整してもいい
           （同じとみなせるqubitが存在する）
         \end{enumerate}
+
+        \item<+-> この球を\textbf{ブロッホ球}と呼び、
+        たとえば$\ket{0}$や$\ket{1}$はそれぞれ球の北極と南極の座標に対応する
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
@@ -966,7 +966,7 @@
           S\ket{\pm} = \frac{1}{\sqrt{2}}\left(\ket{0} \pm i\ket{1}\right)
         \end{align*}
 
-        \item<+-> $Z$上の$\ket{0}, \ket{1}$に$Z, S$ゲートを作用させても
+        \item<+-> $Z$軸上の$\ket{0}, \ket{1}$に$Z, S$ゲートを作用させても
         何も起きない
         \[
           Z\ket{0} = \ket{0}, S\ket{1} = \ket{1}
@@ -1267,7 +1267,7 @@
           \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{H} & \meter \\
           \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \meter
         }}
-        \caption{$H$ゲートだけのテレポート}
+        \caption{$H$ゲートだけのテレポーテーション}
         \label{fig:h_gate_teleportation}
       \end{figure}
     \end{column}
@@ -1347,9 +1347,9 @@
     \item<+-> 3量子ビットを量子通信回線でボブへ送信する
   \end{enumerate}
 
-  \uncover<1->{
-    \begin{columns}
-      \begin{column}{0.5\textwidth}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \uncover<+(-2)->{%
         \begin{figure}
           \centering
           \scalebox{0.8}{
@@ -1363,8 +1363,10 @@
           \caption{アリスの用意する3量子ビット}
           \label{fig:alice_circuit}
         \end{figure}
-      \end{column}
-      \begin{column}{0.5\textwidth}
+      }
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \uncover<+(-4)->{%
         \begin{table}[h]
           \caption{希望とビットの対応}
           \begin{tabularx}{0.7\textwidth}{@{}| Y | Y |@{}}
@@ -1375,9 +1377,9 @@
           \end{tabularx}
           \label{tbl:covert_meaning_2}
         \end{table}
-      \end{column}
-    \end{columns}
-  }
+      }
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -1506,11 +1508,11 @@
       \label{fig:a_eq_1_b_eq_0}
     \end{figure}
   
-    \item<+-> いずれも$S$ゲートと$H$ゲートが2量子ビット目へテレポートする
+    \item<+-> いずれも$S$ゲートと$H$ゲートが2量子ビット目へテレポーテーションする
   \end{itemize}
 
   \uncover<+->{%
-    \bobcallout{+}{$S$ゲートが2量子ビット目へテレポートされる！}
+    \bobcallout{+}{$S$ゲートが2量子ビット目へテレポーテーションされる！}
   }
 \end{frame}
 
@@ -1629,21 +1631,20 @@
       \item $S\ket{-}$はブロッホ球の赤道上なので、測定結果は$\ket{0}, \ket{1}$が$\frac{1}{2}$となる
     \end{itemize}
 
-    \item<+-> したがって$c_2$は$\ket{0}, \ket{1}$が50\%ランダムになる
-
-    \item<+-> アリス・ボブの希望が割れた場合は結果が50\%のランダムとなりOK\ce{:person_gesturing_ok:}
+    \item<+-> アリス・ボブの希望が割れた場合は結果は$0, 1$の50\%ランダムとなりOK\ce{:person_gesturing_ok:}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{プロトコル}
 
-  \pause
   \begin{columns}
     \begin{column}{0.5\textwidth}
+      \pause
       \bobcallout{-}{3量子ビット目は？}  
     \end{column}
     \begin{column}{0.5\textwidth}
+      \pause
       \alicecallout{+}{ボブの不正検知！}
     \end{column}
   \end{columns}
