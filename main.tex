@@ -474,7 +474,9 @@
       \item[結果が\heartcard]<+-> アリスの希望どおり
       \item[結果が\clubcard]<+-> ボブの希望どおり
     \end{description}
-    このように2つの結果がそれぞれ50\%のランダムとなる
+    \uncover<+->{%
+      このように2つの結果がそれぞれ50\%のランダムとなる
+    }
   \end{itemize}
 \end{frame}
 
@@ -485,9 +487,10 @@
     \item Covert Lotteryは場合によって\textbf{情報リーク}を起こす
   \end{itemize}
 
+  \pause
   \begin{columns}
     \begin{column}{0.6\textwidth}
-      \uncover<+->{
+      \uncover<+->{%
         \alicecallout{+}{%
           アリスが不本意に\\
           割り勘となってしまった場合、\\
@@ -495,7 +498,7 @@
         }
       }
 
-      \uncover<+->{
+      \uncover<+->{%
         \bobcallout{-}{%
           しかしこのときボブは\\
           アリスの希望が分からない
@@ -503,16 +506,14 @@
       }
     \end{column}
     \begin{column}{0.4\textwidth}
-      \uncover<+(-2)->{
-        \begin{itemize}
-          \item アリスが不本意に割り勘となった場合、
-          アリスは奢りを希望していたがボブは割り勘を希望しており、
-          ランダムで割り勘となった
+      \begin{itemize}
+        \item<+(-2)-> アリスが不本意に割り勘となった場合、
+        アリスは奢りを希望していたがボブは割り勘を希望しており、
+        ランダムで割り勘となった
 
-          \item<2-> このように希望通りになった側は相手の希望が分からず、
-          希望通りにならかった側は相手の希望を知ることができる
-        \end{itemize}
-      }
+        \item<+(-2)-> このように希望通りになった側は相手の希望が分からず、
+        希望通りにならかった側は相手の希望を知ることができる
+      \end{itemize}
     \end{column}
   \end{columns}
 \end{frame}
@@ -543,6 +544,7 @@
       \end{minipage}
     \end{column}
     \begin{column}{0.45\textwidth}
+      \pause
       \begin{itemize}
         \item<+-> Covert Lotteryをカードで実装した
         
@@ -613,10 +615,13 @@
   \frametitle{ブロッホ球}
 
   \begin{columns}
-    \begin{column}{0.6\textwidth}
+    \begin{column}{0.5\textwidth}
       \begin{itemize}
         \item<+-> 複素数は実数$a, b$を用いて$a + b\sqrt{-1}$のように表現される
-    
+
+        \item<+-> この球を\textbf{ブロッホ球}と呼び、
+        たとえば$\ket{0}$や$\ket{1}$はそれぞれ球の北極と南極の座標に対応する
+
         \item<+-> 1qubitの表現に2つの複素数$c_0, c_1$が必要なので、4変数の自由度があるが
         下記2つの条件により\textbf{球の表面座標}と考えることができる
         \begin{enumerate}
@@ -624,19 +629,15 @@
           \item $c_0$が実数になるように$c_1$を調整してもいい
           （同じとみなせるqubitが存在する）
         \end{enumerate}
-
-        \item<+-> この球のことを\textbf{ブロッホ球}と呼び、
-        たとえば$\ket{0}$や$\ket{1}$はそれぞれ球の北極と南極の座標に対応する
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
-      \uncover<3->{
+      \uncover<+(-2)->{
         \begin{figure}
           \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0.05]
             \drawBallGrid[style={opacity=0.1}]{40}{40}
-        
-            \drawAxis[style={cyan}]{0}{0};
-            
+            \drawAxis[style={cyan}]{0}{0}
+
             \labelLatLon{up}{90}{0};
             \labelLatLon{down}{-90}{90};
             \labelLatLon{left}{0}{0};
@@ -656,14 +657,14 @@
 
   \begin{columns}
     \begin{column}{0.4\textwidth}
-      \uncover<3->{
+      \uncover<2->{
         \begin{figure}
           \begin{blochsphere}[radius=0.38\textwidth, tilt=15,rotation=-20,opacity=0.05]
             \drawBallGrid[style={opacity=0.1}]{40}{40}
         
-            \drawAxis[style={cyan}]{0}{0};
-            \drawAxis[style={orange}]{90}{0};
-            \drawCircle[style={red}]{0}{-90};
+            \drawAxis[style={cyan}]{0}{0}
+            \drawAxis[style={orange}]{90}{0}
+            \drawCircle[style={red}]{0}{-90}
             
             \labelLatLon{up}{90}{0};
             \labelLatLon{down}{-90}{90};
@@ -691,12 +692,12 @@
             \ket{-} &\equiv& \frac{1}{\sqrt{2}}\left(\ket{0} - \ket{1}\right)
           \end{array}\right.
         \end{align*}
+        \begin{itemize}
+          \item $\ket{\pm}$はブロッホ球の赤道上（図\ref{fig:bloch_sphere_pm}）となる
+        \end{itemize}
 
         \item<+-> $\ket{\pm}$は$\ket{0}, \ket{1}$が観測される確率が
         それぞれ$\left|\pm\frac{1}{\sqrt{2}}\right|^2 = \frac{1}{2}$になる
-        \begin{itemize}
-          \item $\ket{\pm}$は図\ref{fig:bloch_sphere_pm}のようなブロッホ球の赤道上となる
-        \end{itemize}
       \end{itemize}
     \end{column}
   \end{columns}
@@ -764,17 +765,17 @@
   
     \drawAxis[style={cyan}]{0}{0}
     %\drawAxis[style={orange}]{90}{0}
-    \drawCircle[style={red}]{0}{-90};
+    \drawCircle[style={red}]{0}{-90}
     \drawAxis[style={orange}]{90}{90}
 
-    \labelLatLon{n1}{45}{90}
-    \labelLatLon{n2}{-45}{-90}
+    \labelLatLon{n1}{45}{90};
+    \labelLatLon{n2}{-45}{-90};
     \draw[->] (n2)--(n1);
     \drawSmallCircle[style={dashed, thick}]{45}{90}{45}
     
-    \labelLatLon{x}{0}{90}
-    \labelLatLon{y}{0}{0}
-    \labelLatLon{z}{90}{90}
+    \labelLatLon{x}{0}{90};
+    \labelLatLon{y}{0}{0};
+    \labelLatLon{z}{90}{90};
     \labelLatLon{down}{-90}{90};
     
     \node[above] at (z) {$\ket{0}$};
@@ -794,7 +795,7 @@
   \begin{columns}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item<+-> IBM Quantum Composer\footnote{\url{https://quantum-computing.ibm.com/composer/}}で実際にシミュレーションしてみる
+        \item<+-> IBM Quantum Composer\footnote{\url{https://quantum-computing.ibm.com/composer/}}でシミュレーションしてみる
 
         \item<+-> 初期値である$\ket{0}$から$\ket{+}$を作るために\textbf{量子ゲート}を使う
 
@@ -813,7 +814,7 @@
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
-      \uncover<2->{
+      \uncover<4->{
         \begin{figure}
           \HGateFigure
           \caption{$H$ゲートの回転中心$n$}
@@ -870,7 +871,7 @@
     \end{column}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item<+-> $H$ゲートは$n$中心に$\pi$回転なので次のように2回やれば元の$\ket{0}$に戻る
+        \item $H$ゲートは$n$中心に$\pi$回転なので次のように2回やれば元の$\ket{0}$に戻る
         \begin{figure}
           \centering
           \scalebox{1.0}{
@@ -882,7 +883,7 @@
           \includegraphics[width=0.7\textwidth]{./img/hgate_hgate_histogram.pdf}
         \end{figure}
 
-        \item<+-> 同様に$H\ket{1} = \ket{-}$かつ$H\ket{-} = \ket{1}$となる
+        \item 同様に$H\ket{1} = \ket{-}$かつ$H\ket{-} = \ket{1}$となる
       \end{itemize}
     \end{column}
   \end{columns}
@@ -903,7 +904,7 @@
 
         \item<+-> 古典コンピュータの\texttt{NOT}ゲートと似ている
 
-        \item<+-> $X$上の$\ket{\pm}$に$X$ゲートを作用させても
+        \item<+-> $X$軸上の$\ket{\pm}$に$X$ゲートを作用させても
         何も起きない
         \[
           X\ket{\pm} = \ket{\pm}
@@ -917,17 +918,17 @@
         
           \drawAxis[style={cyan}]{0}{0}
           %\drawAxis[style={orange}]{90}{0}
-          \drawCircle[style={red}]{0}{-90};
+          \drawCircle[style={red}]{0}{-90}
           %\drawAxis[style={orange}]{90}{90}
       
-          \labelLatLon{n1}{0}{90}
-          \labelLatLon{n2}{0}{-90}
+          \labelLatLon{n1}{0}{90};
+          \labelLatLon{n2}{0}{-90};
           \draw[orange,->] (n2)--(n1);
           \drawSmallCircle[style={dashed, thick}]{90}{90}{0}
           
-          \labelLatLon{x}{0}{90}
-          \labelLatLon{y}{0}{0}
-          \labelLatLon{z}{90}{90}
+          \labelLatLon{x}{0}{90};
+          \labelLatLon{y}{0}{0};
+          \labelLatLon{z}{90}{90};
           \labelLatLon{down}{-90}{90};
           
           \node[above] at (z) {$\ket{0}$};
@@ -980,19 +981,19 @@
           \drawAxis[style={blue}]{90}{0}
           \drawAxis[style={orange}]{90}{90}
       
-          \labelLatLon{l}{0}{0}
-          \labelLatLon{r}{180}{0}
-          \labelLatLon{n1}{90}{0}
-          \labelLatLon{n2}{-90}{0}
+          \labelLatLon{l}{0}{0};
+          \labelLatLon{r}{180}{0};
+          \labelLatLon{n1}{90}{0};
+          \labelLatLon{n2}{-90}{0};
           \draw[cyan,->] (n2)--(n1);
           \drawSmallCircle[style={dashed, thick}]{0}{0}{0}
           
-          \labelLatLon{x}{0}{90}
-          \labelLatLon{y}{0}{0}
-          \labelLatLon{z}{90}{90}
+          \labelLatLon{x}{0}{90};
+          \labelLatLon{y}{0}{0};
+          \labelLatLon{z}{90}{90};
           \labelLatLon{down}{-90}{90};
           
-          \labelLatLon{n3}{0}{-90}
+          \labelLatLon{n3}{0}{-90};
 
           %\node[above] at (z) {$\ket{0}$};
           \node[below] at (down) {$\ket{1}$};
@@ -1034,7 +1035,7 @@
 
   \pause
   \begin{itemize}
-    \item<+-> $CZ$ゲートは2量子ビットを入力に持ち、
+    \item $CZ$ゲートは2量子ビットを入力に持ち、
     \begin{enumerate}
       \item 1量子ビット目が$\ket{0}$であれば何もせず、
       \item 一方で1量子ビット目が$\ket{1}$であれば2量子ビット目に$Z$ゲートを作用させる
@@ -1080,7 +1081,7 @@
 
   \pause
   \begin{itemize}
-    \item 2量子ビット目の$\ket{0}_2$について考えると
+    \item<+-> 2量子ビット目の$\ket{0}_2$について考えると
     \begin{enumerate}
       \item $H$ゲートにより$\ket{+}$となる \label{enum:cz_gate_1}
 
@@ -1121,7 +1122,7 @@
   \end{itemize}
 
   \pause
-  \alicecallout{+}{シミュレーターでやってみる！}
+  \alicecallout{-}{シミュレーターでやってみる！}
 \end{frame}
 
 \begin{frame}
@@ -1150,7 +1151,7 @@
 
   \pause
   \begin{itemize}
-    \item 2つの量子ビットが$\ket{+}$のとき、$CZ$ゲートを用いた
+    \item<+-> 2つの量子ビットが$\ket{+}$のとき、$CZ$ゲートを用いた
     図\ref{fig:teleportation_circuit}の回路を考える
     \begin{enumerate}
       \item $Z$軸の回転ゲートを作用させ \label{enum:teleportation_1}
@@ -1171,17 +1172,20 @@
           \label{fig:teleportation_circuit}
         \end{figure}
 
-        \pause
-        \bobcallout{-}{%
-          1量子ビット目は常に$\ket{1}$では？\ce{:thinking:}\\
-          $HZH\ket{0}_1 = HZ\ket{+}_1 = H\ket{-}_1 = \ket{1}_1$
+        \uncover<+(1)->{%
+          \bobcallout{-}{%
+            1量子ビット目は常に$\ket{1}$では？\ce{:thinking:}\\
+            $HZH\ket{0}_1 = HZ\ket{+}_1 = H\ket{-}_1 = \ket{1}_1$
+          }
         }
       \end{column}
       \begin{column}{0.4\textwidth}
-        \begin{figure}
-          \includegraphics[width=0.8\textwidth]{./img/cz_teleportation_histogram.pdf}
-          \caption{回路\ref{fig:teleportation_circuit}のシミュレーション結果}
-        \end{figure}
+        \uncover<+(-1)->{%
+          \begin{figure}
+            \includegraphics[width=0.8\textwidth]{./img/cz_teleportation_histogram.pdf}
+            \caption{回路\ref{fig:teleportation_circuit}のシミュレーション結果}
+          \end{figure}
+        }
       \end{column}
     \end{columns}
   \end{itemize}
@@ -1278,9 +1282,9 @@
 
   \pause
   \begin{itemize}
-    \item 1量子ビット目は$H$ゲートが2回作用しているので、$CZ$ゲートがなければキャンセルして常に$\ket{0}$となる
+    \item<+-> 1量子ビット目は$H$ゲートが2回作用しているので、$CZ$ゲートがなければキャンセルして常に$\ket{0}$となる
 
-    \item しかし図\ref{fig:h_gate_teleportation_histogram}では
+    \item<+-> しかし図\ref{fig:h_gate_teleportation_histogram}では
     1量子ビット目が$\ket{0},\ket{1}$のランダムとなっている
   \end{itemize}
 \end{frame}
@@ -1309,6 +1313,7 @@
       \end{minipage}
     \end{column}
     \begin{column}{0.45\textwidth}
+      \pause
       \begin{itemize}
         \item<+-> もっと色々な量子ゲートがある
 
@@ -1324,21 +1329,12 @@
   \end{columns}
 \end{frame}
 
-\newcommand{\CovertTable}{%
-  \begin{tabularx}{0.9\textwidth}{@{}| Y | Y |@{}}
-    \hline
-    希望 & 意味 \\ \hline
-    $0$ & ボブの奢り \\ \hline
-    $1$ & 割り勘 \\ \hline
-  \end{tabularx}%
-}
-
 \begin{frame}
   \frametitle{プロトコル}
 
   \pause
   \begin{enumerate}
-    \item<+-> アリスは表\ref{tbl:covert_meaning}にしたがって希望$a \in \{0, 1\}$と、
+    \item<+-> アリスは表\ref{tbl:covert_meaning_2}にしたがって希望$a \in \{0, 1\}$と、
     乱数$x \in \{0, 1\}$を生成する
 
     \item<+-> アリスは次のような回路\ref{fig:alice_circuit}で表現される3量子ビットを用意する
@@ -1370,9 +1366,14 @@
       \end{column}
       \begin{column}{0.5\textwidth}
         \begin{table}[h]
-          \caption{希望の意味}
-          \label{tbl:covert_meaning}
-          \CovertTable
+          \caption{希望とビットの対応}
+          \begin{tabularx}{0.7\textwidth}{@{}| Y | Y |@{}}
+            \hline
+            希望 & 意味 \\ \hline
+            $0$ & ボブの奢り \\ \hline
+            $1$ & 割り勘 \\ \hline
+          \end{tabularx}
+          \label{tbl:covert_meaning_2}
         \end{table}
       \end{column}
     \end{columns}
@@ -1393,7 +1394,7 @@
     \end{itemize}
     \label{enum:bob_s_gate}
 
-    \item ボブは1量子ビット目に$H$ゲートを作用させる
+    \item<+-> ボブは1量子ビット目に$H$ゲートを作用させる
     \label{enum:bob_h_gate}
   \end{enumerate}
 
@@ -1427,7 +1428,7 @@
 
   \pause
   \begin{itemize}
-    \item 1量子ビット目とアリス・ボブの希望に注目すると図\ref{fig:1st_qubit}の回路になる
+    \item 1量子ビット目とアリス・ボブの希望$a,b$に注目すると図\ref{fig:1st_qubit}の回路になる
     \begin{figure}
       \centering
       \scalebox{1.0}{
@@ -1494,7 +1495,7 @@
 
   \pause
   \begin{itemize}
-    \item 一方で、アリス・ボブの希望が一致しないのは$a \ne b$なので次のようになる
+    \item<+-> 一方で、アリス・ボブの希望が一致しない場合$a \ne b$なので次のようになる
     \begin{figure}
       \scalebox{1.0}{
       \Qcircuit @C=1.0em @R=0.2em @!R {
@@ -1508,8 +1509,9 @@
     \item<+-> いずれも$S$ゲートと$H$ゲートが2量子ビット目へテレポートする
   \end{itemize}
 
-  \pause
-  \bobcallout{+}{$S$ゲートが2量子ビット目へテレポートされる！}
+  \uncover<+->{%
+    \bobcallout{+}{$S$ゲートが2量子ビット目へテレポートされる！}
+  }
 \end{frame}
 
 \begin{frame}
@@ -1527,30 +1529,21 @@
       }}%
     \end{figure}
 
-    \item<+-> ボブは$c_1$に応じて次のように$X$ゲートを2,3量子ビット目に作用させる
-    \begin{columns}
-      \begin{column}{0.4\textwidth}
-        \begin{figure}
-          \scalebox{1.0}{
-            \Qcircuit @C=1.0em @R=0.2em @!R {
-                                &          &  \\
-              \lstick{c_1}       & \cw      & \cw               & \cw       & \cw      & \control\cw \\
-              \lstick{\ket{0}_2} & \gate{H} & \gate{Z}\qwx[-2]  & \ctrl{1}  & \qw      & \gate{X}\cwx & \qw \\
-              \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?}        & \gate{Z}  & \gate{H} & \gate{X}\cwx & \qw
-            }}
-        \end{figure}
-      \end{column}
-      \begin{column}{0.4\textwidth}
-        \begin{description}
-          \item[$c_1 = 0$のとき] なにもしない
-          \item[$c_1 = 1$のとき] $X$ゲートを作用
-        \end{description}
-      \end{column}
-    \end{columns}
+    \item<+-> ボブは$c_1 = 1$なら次のように$X$ゲートを2, 3量子ビット目に作用させる
+    \begin{figure}
+      \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+                            &          &  \\
+          \lstick{c_1}       & \cw      & \cw               & \cw       & \cw      & \control\cw \\
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z}\qwx[-2]  & \ctrl{1}  & \qw      & \gate{X}\cwx & \qw \\
+          \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?}        & \gate{Z}  & \gate{H} & \gate{X}\cwx & \qw
+        }}
+    \end{figure}
   \end{enumerate}
 
-  \pause
-  \bobcallout{+}{量子ゲートテレポーテーションで偶発的に生じる$X$ゲートをキャンセル！}
+  \uncover<+->{%
+    \bobcallout{+}{量子ゲートテレポーテーションで偶発的に生じる$X$ゲートをキャンセル！}
+  }
 \end{frame}
 
 \begin{frame}
@@ -1568,12 +1561,14 @@
                              &          &                   &
         }}
     \end{figure}
+    \label{enum:bob_measure_2nd_qubit}
     
     \item<+-> プロトコルの結果として$c_2$をアリスへ共有する
   \end{enumerate}
 
-  \pause
-  \alicecallout{-}{2, 3量子ビット目は希望$a, b$で場合わけ}
+  \uncover<+->{%
+    \alicecallout{-}{2, 3量子ビット目は希望$a, b$で場合わけ}
+  }
 \end{frame}
 
 \begin{frame}
@@ -1608,6 +1603,9 @@
 
   \begin{itemize}
     \item<+-> $H,Z,H$ゲート操作で2量子ビット目は$\ket{1}$に確定し$c_2 = 1$となる
+    \[
+      HZH\ket{0}_2 = HZ\ket{+}_2 = H\ket{-}_2 = \ket{1}_2
+    \]
 
     \item<+-> アリス・ボブの両方が「割り勘」である$1$を希望しているため、
     プロトコルの結果として$1$となりOK\ce{:person_gesturing_ok:}
@@ -1640,6 +1638,7 @@
 \begin{frame}
   \frametitle{プロトコル}
 
+  \pause
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \bobcallout{-}{3量子ビット目は？}  
@@ -1649,10 +1648,11 @@
     \end{column}
   \end{columns}
 
+  \pause
   \begin{enumerate}
     \setcounter{enumi}{10}
 
-    \item ボブは3量子ビット目を測定し$c_3$としアリスへ送信する
+    \item<+-> ボブは3量子ビット目を測定し$c_3$としアリスへ送信する
     \begin{figure}
       \scalebox{1.0}{
         \Qcircuit @C=1.0em @R=0.2em @!R {
@@ -1661,10 +1661,13 @@
         }}
     \end{figure}
 
-    \item アリスはボブから$c_2, c_3$を受け取り、式\ref{eq:alice_check}を確認する
+    \item<+-> アリスはボブから$c_2, c_3$を受け取り、式\ref{eq:alice_check}を確認する
     \begin{align}
       c_2\; \mathtt{XOR}\; x \stackrel{?}{=} c_3 \label{eq:alice_check}
     \end{align}
+    \begin{itemize}
+      \item 式\ref{eq:alice_check}が等しくなければプロトコルを中止する
+    \end{itemize}
   \end{enumerate}
 \end{frame}
 
@@ -1673,9 +1676,10 @@
 
   \pause
   \begin{itemize}
-    \item<+-> 二人の希望が衝突した場合、ボブは自分に都合がいい$c_2$が観測されたと偽ることができる\ce{:smiling_imp:}
+    \item<+-> 二人の希望が衝突した場合、
+    ボブは\ballref{enum:bob_measure_2nd_qubit}で都合がいい$c_2$が観測されたと偽ることができる\ce{:smiling_imp:}
 
-    \item<+-> ボブが正しく測定をしなかった場合$\frac{1}{2}$の確率でアリスはそれを検知できる
+    \item<+-> 式\ref{eq:alice_check}により、アリスは確率$\frac{1}{2}$でボブの不正を検知できる
 
     \item<+-> 検証用の量子ビットを$n$ qubit用意すれば$\frac{1}{2^n}$でボブの不正を困難にできる
     \begin{itemize}
@@ -1684,18 +1688,20 @@
     \end{itemize}
   \end{itemize}
 
-  \begin{figure}
-    \scalebox{0.8}{
-      \Qcircuit @C=1.0em @R=0.2em @!R {
-                           &          &                &                  &                  &          &     &  \\ 
-        \lstick{\ket{0}_2} & \gate{H} & \qw            & \gate{Z}\qwx[-1] & \ctrl{1}         & \qw      & \qw & \gate{X}\cwx[-1] & \meter \\
-        \lstick{\ket{0}_3} & \gate{H} & \gate{Z^{x_1}} & \qw              & \gate{Z}\ctrl{1} & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_3}\\
-        \lstick{\ket{0}_4} & \gate{H} & \gate{Z^{x_2}} & \qw              & \gate{Z}\ctrl{1} & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_4}\\
-        \lstick{\ket{0}_4} & \gate{H} & \gate{Z^{x_3}} & \qw              & \gate{Z}         & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_5}\\
-      }}
-    \caption{ボブの不正対策を増やした回路}
-    \label{fig:bob_cheat_detection}
-  \end{figure}
+  \uncover<.->{%
+    \begin{figure}
+      \scalebox{0.8}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+                            &          &                &                  &                  &          &     &  \\ 
+          \lstick{\ket{0}_2} & \gate{H} & \qw            & \gate{Z}\qwx[-1] & \ctrl{1}         & \qw      & \qw & \gate{X}\cwx[-1] & \meter \\
+          \lstick{\ket{0}_3} & \gate{H} & \gate{Z^{x_1}} & \qw              & \gate{Z}\ctrl{1} & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_3}\\
+          \lstick{\ket{0}_4} & \gate{H} & \gate{Z^{x_2}} & \qw              & \gate{Z}\ctrl{1} & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_4}\\
+          \lstick{\ket{0}_5} & \gate{H} & \gate{Z^{x_3}} & \qw              & \gate{Z}         & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_5}\\
+        }}
+      \caption{ボブの不正対策を増やした回路}
+      \label{fig:bob_cheat_detection}
+    \end{figure}
+  }
 \end{frame}
 
 % \begin{frame}
@@ -1720,6 +1726,10 @@
   \begin{itemize}
     \item<+-> 量子コンピュータを用いた``Quantum Covert Lottery''で
     奢り・割り勘問題に決着をつけられるかもしれない
+    \begin{itemize} 
+      \item すでにインターネットで公開しているプロトコル\cite{quantum_covert_lottery}は
+      ボブの不正対策がない\ce{:innocent:}
+    \end{itemize}
 
     \item<+-> 今回は2人だったが、これを多人数拡張すると別のゲームに使えるかも\ce{:thinking_face:}
     \begin{itemize}
