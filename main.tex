@@ -352,6 +352,7 @@
       \end{figure}
     \end{column}
     \begin{column}{0.3\textwidth}
+      \pause
       \simplecallout[{\LARGE\ce{:sunglasses:}}]{+}{green!10}{{\large\ce{:point_left:}これか！？}}
     \end{column}
   \end{columns}
@@ -543,9 +544,11 @@
     \end{column}
     \begin{column}{0.45\textwidth}
       \begin{itemize}
-        \item このCovert Lotteryをカードではなくて量子コンピュータでやりたい
+        \item<+-> Covert Lotteryをカードで実装した
+        
+        \item<+-> カードではなくて量子コンピュータでやりたい
 
-        \item その前にまずは量子コンピュータの基礎的なところを解説
+        \item<+-> まずは量子コンピュータの基礎的なところを解説
       \end{itemize}
     \end{column}
   \end{columns}
@@ -554,31 +557,32 @@
 \begin{frame}
   \frametitle{量子コンピュータ}
 
+  \pause
   \begin{itemize}
-    \item 古典コンピュータは1bitで\heartcard,\clubcard のような2つの値$0,1$しか持たない
+    \item<+-> 古典コンピュータは1bitで\heartcard,\clubcard のような2つの値$0,1$しか持たない
 
-    \item 一方で量子コンピュータの1bitに相当する\emph{1qubit}（量子ビット）は
+    \item<+-> 一方で量子コンピュータの1bitに相当する\textbf{量子ビット}（\emph{qubit}）は
     2つの複素数$c_0, c_1$によって式\ref{eq:qubit}のように拡張される
     \begin{align}
       c_0\ket{0} + c_1\ket{1} \label{eq:qubit}
     \end{align}
 
-    \item 古典コンピュータの1bitと同じ$\ket{0}, \ket{1}$のとき、
+    \item<+-> 古典コンピュータの1bitと同じ$\ket{0}, \ket{1}$のとき、
     $c_0, c_1$はそれぞれ次のようになる
     \begin{description}
       \item[$\ket{0}$] $c_0 = 1, c_1 = 0$
       \item[$\ket{1}$] $c_0 = 0, c_1 = 1$
     \end{description}
 
-    % \item たとえば$\ket{0} = \Zero, \ket{1} = \One$のように行列で表せる
-    % \[
-    %   c_0\Zero + c_1\One = \left(
-    %     \begin{array}{c}
-    %       c_0 \\
-    %       c_1
-    %     \end{array}
-    %   \right)
-    % \]
+    \item<+-> ちなみに$\ket{0} = \Zero, \ket{1} = \One$のように行列で表せる
+    \[
+      c_0\Zero + c_1\One = \left(
+        \begin{array}{c}
+          c_0 \\
+          c_1
+        \end{array}
+      \right)
+    \]
   \end{itemize}
 \end{frame}
 
@@ -589,19 +593,19 @@
     c_0\ket{0} + c_1\ket{1} \tag{\ref{eq:qubit}}
   \]
   \begin{itemize}
-    \item 式\ref{eq:qubit}の複素数$c_0, c_1$は\textbf{確率振幅}と呼ばれ、
+    \item<+-> 式\ref{eq:qubit}の複素数$c_0, c_1$は\textbf{確率振幅}と呼ばれ、
     次のように$\ket{0}, \ket{1}$が観測される確率を得ることができる
     \begin{description}
       \item[$\ket{0}$が観測される確率] $|c_0|^2$
       \item[$\ket{1}$が観測される確率] $|c_1|^2$
     \end{description}
 
-    \item 確率なので、$c_0, c_1$は次の条件式\ref{eq:probability_amplitude_constraint}を満す
+    \item<+-> 確率なので、$c_0, c_1$は次の条件式\ref{eq:probability_amplitude_constraint}を満す
     \begin{align}
       |c_0|^2 + |c_1|^2 = 1 \label{eq:probability_amplitude_constraint}
     \end{align}
 
-    \item 一方で$c_0, c_1$の具体的な値を直接知る方法はない
+    \item<+-> 一方で$c_0, c_1$の具体的な値を直接知る方法はない
   \end{itemize}
 \end{frame}
 
@@ -611,9 +615,9 @@
   \begin{columns}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item 複素数は実数$a, b$を用いて$a + b\sqrt{-1}$のように表現される
+        \item<+-> 複素数は実数$a, b$を用いて$a + b\sqrt{-1}$のように表現される
     
-        \item 1qubitの表現に2つの複素数$c_0, c_1$が必要なので、4変数の自由度があるが
+        \item<+-> 1qubitの表現に2つの複素数$c_0, c_1$が必要なので、4変数の自由度があるが
         下記2つの条件により\textbf{球の表面座標}と考えることができる
         \begin{enumerate}
           \item 確率の満す条件式\ref{eq:probability_amplitude_constraint}
@@ -621,27 +625,28 @@
           （同じとみなせるqubitが存在する）
         \end{enumerate}
 
-        \item この球のことを\textbf{ブロッホ球}と呼び、
-        たとえば$\ket{0}$や$\ket{1}$はそれぞれ
-        球の北極と南極の座標に対応する
+        \item<+-> この球のことを\textbf{ブロッホ球}と呼び、
+        たとえば$\ket{0}$や$\ket{1}$はそれぞれ球の北極と南極の座標に対応する
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
-      \begin{figure}
-        \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0.02]
-          \drawBallGrid[style={opacity=0.1}]{40}{40}
-      
-          \drawAxis[style={cyan}]{0}{0};
-          
-          \labelLatLon{up}{90}{0};
-          \labelLatLon{down}{-90}{90};
-          \labelLatLon{left}{0}{0};
-          \labelLatLon{right}{180}{0};
-          \node[above] at (up) {$\ket{0}$};
-          \node[below] at (down) {$\ket{1}$};
-        \end{blochsphere}
-        \caption{ブロッホ球}
-      \end{figure}
+      \uncover<3->{
+        \begin{figure}
+          \begin{blochsphere}[radius=0.4\textwidth, tilt=15,rotation=-20,opacity=0.05]
+            \drawBallGrid[style={opacity=0.1}]{40}{40}
+        
+            \drawAxis[style={cyan}]{0}{0};
+            
+            \labelLatLon{up}{90}{0};
+            \labelLatLon{down}{-90}{90};
+            \labelLatLon{left}{0}{0};
+            \labelLatLon{right}{180}{0};
+            \node[above] at (up) {$\ket{0}$};
+            \node[below] at (down) {$\ket{1}$};
+          \end{blochsphere}
+          \caption{ブロッホ球}
+        \end{figure}
+      }
     \end{column}
   \end{columns}
 \end{frame}
@@ -651,33 +656,35 @@
 
   \begin{columns}
     \begin{column}{0.4\textwidth}
-      \begin{figure}
-        \begin{blochsphere}[radius=0.38\textwidth, tilt=15,rotation=-20,opacity=0.02]
-          \drawBallGrid[style={opacity=0.1}]{40}{40}
-      
-          \drawAxis[style={cyan}]{0}{0};
-          \drawAxis[style={orange}]{90}{0};
-          \drawCircle[style={red}]{0}{-90};
-          
-          \labelLatLon{up}{90}{0};
-          \labelLatLon{down}{-90}{90};
-          \labelLatLon{left}{0}{0};
-          \labelLatLon{right}{180}{0};
-          \node[above] at (up) {$\ket{0}$};
-          \node[below] at (down) {$\ket{1}$};
-          \node[above] at (left) {$\ket{+}$};
-          \node[above] at (right) {$\ket{-}$};
-        \end{blochsphere}
-        \caption{ブロッホ球上の$\ket{\pm}$}
-      \end{figure}
+      \uncover<3->{
+        \begin{figure}
+          \begin{blochsphere}[radius=0.38\textwidth, tilt=15,rotation=-20,opacity=0.05]
+            \drawBallGrid[style={opacity=0.1}]{40}{40}
+        
+            \drawAxis[style={cyan}]{0}{0};
+            \drawAxis[style={orange}]{90}{0};
+            \drawCircle[style={red}]{0}{-90};
+            
+            \labelLatLon{up}{90}{0};
+            \labelLatLon{down}{-90}{90};
+            \labelLatLon{left}{0}{0};
+            \labelLatLon{right}{180}{0};
+            \node[above] at (up) {$\ket{0}$};
+            \node[below] at (down) {$\ket{1}$};
+            \node[above] at (left) {$\ket{+}$};
+            \node[above] at (right) {$\ket{-}$};
+          \end{blochsphere}
+          \caption{ブロッホ球上の$\ket{\pm}$}
+          \label{fig:bloch_sphere_pm}
+        \end{figure}
+      }
     \end{column}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item ``シュレディンガーの猫''で有名なように、量子ビットは$\ket{0}$と$\ket{1}$の
-        ``混ざった''ような状態を表現できる
+        \item<+-> \textbf{シュレディンガーの猫}で有名なように、量子ビットは$\ket{0}, \ket{1}$の
+        ``重なった''状態を表現できる
 
-        \item たとえば$c_0 = \frac{1}{\sqrt{2}}, c_1 = \pm\frac{1}{\sqrt{2}}$として
-        次のような2つの量子ビット$\ket{\pm}$を考える
+        \item<+-> $c_0 = \frac{1}{\sqrt{2}}, c_1 = \pm\frac{1}{\sqrt{2}}$な量子ビット$\ket{\pm}$を考える
         \begin{align*}
           \left\{\begin{array}{lcl}
             \ket{+} &\equiv& \frac{1}{\sqrt{2}}\left(\ket{0} + \ket{1}\right) \\
@@ -685,11 +692,11 @@
           \end{array}\right.
         \end{align*}
 
-        \item これらは$\ket{0}, \ket{1}$が観測される確率が
-        いずれも$\left|\pm\frac{1}{\sqrt{2}}\right|^2 = \frac{1}{2}$になる
-        %\begin{itemize}
-        %  \item したがってシュレディンガーの猫はブロッホ球の赤道上の座標に相当する状態である
-        %\end{itemize}
+        \item<+-> $\ket{\pm}$は$\ket{0}, \ket{1}$が観測される確率が
+        それぞれ$\left|\pm\frac{1}{\sqrt{2}}\right|^2 = \frac{1}{2}$になる
+        \begin{itemize}
+          \item $\ket{\pm}$は図\ref{fig:bloch_sphere_pm}のようなブロッホ球の赤道上となる
+        \end{itemize}
       \end{itemize}
     \end{column}
   \end{columns}
@@ -701,7 +708,7 @@
 %   \begin{columns}
 %     \begin{column}{0.2\textwidth}
 %       \begin{figure}
-%         \begin{blochsphere}[radius=0.6\textwidth, tilt=15,rotation=-20,opacity=0.02]
+%         \begin{blochsphere}[radius=0.6\textwidth, tilt=15,rotation=-20,opacity=0.05]
 %           \drawBallGrid[style={opacity=0.1}]{40}{40}
       
 %           \drawAxis[style={cyan}]{0}{0};
@@ -783,18 +790,19 @@
 \begin{frame}
   \frametitle{1量子ビットのシミュレータ実験}
 
+  \pause
   \begin{columns}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item IBM Quantum Composer\footnote{\url{https://quantum-computing.ibm.com/composer/}}で実際にシミュレーションしてみる
+        \item<+-> IBM Quantum Composer\footnote{\url{https://quantum-computing.ibm.com/composer/}}で実際にシミュレーションしてみる
 
-        \item 初期値である$\ket{0}$から$\ket{+}$を作るために\textbf{量子ゲート}を使う
+        \item<+-> 初期値である$\ket{0}$から$\ket{+}$を作るために\textbf{量子ゲート}を使う
 
-        \item $H$ゲート\footnote{``アダマールゲート''と読みます。}は
+        \item<+-> $H$ゲート\footnote{``アダマールゲート''と読む。}は
         図\ref{fig:hadamard_center}の$n$を中心に$\pi$回転させるので、
         $\ket{0}$が$\ket{+}$へ移る
 
-        \item $\ket{+}$を$\left\{\ket{0}, \ket{1}\right\}$で測定する次のような回路をやってみる
+        \item<+-> $\ket{+}$を$\left\{\ket{0}, \ket{1}\right\}$で測定する次のような回路をやってみる
         \begin{figure}
           \centering
           \scalebox{1.0}{
@@ -805,11 +813,13 @@
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
-      \begin{figure}
-        \HGateFigure
-        \caption{$H$ゲートの回転中心$n$}
-        \label{fig:hadamard_center}
-      \end{figure}
+      \uncover<2->{
+        \begin{figure}
+          \HGateFigure
+          \caption{$H$ゲートの回転中心$n$}
+          \label{fig:hadamard_center}
+        \end{figure}
+      }
     \end{column}
   \end{columns}
 \end{frame}
@@ -820,13 +830,23 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-        \item 結果は図\ref{fig:hgate_result}のように、
+        \item<+-> 結果は図\ref{fig:hgate_result}のように、
         $\ket{0}$と$\ket{1}$が
         $\frac{1}{2}$の確率でそれぞれ測定されている
 
-        \item これで量子回路としてシュレディンガーの猫が完成\ce{:cat:}
-
-        \item 同様に$H\ket{1} = \ket{-}$かつ$H\ket{-} = \ket{1}$となる
+        \item<+-> これで量子回路としてシュレディンガーの猫が完成\ce{:cat:}
+        \begin{columns}
+          \begin{column}{0.4\textwidth}
+            \begin{figure}
+              \includegraphics[width=0.5\textwidth]{./img/cat_russian_blue.png}
+            \end{figure}
+          \end{column}
+          \begin{column}{0.4\textwidth}
+            \begin{figure}
+              \includegraphics[width=0.5\textwidth]{./img/coin_toss.png}
+            \end{figure}
+          \end{column}
+        \end{columns}
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -850,7 +870,7 @@
     \end{column}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item $H$ゲートは$n$中心に$\pi$回転なので次のように2回やれば元の$\ket{0}$に戻る
+        \item<+-> $H$ゲートは$n$中心に$\pi$回転なので次のように2回やれば元の$\ket{0}$に戻る
         \begin{figure}
           \centering
           \scalebox{1.0}{
@@ -859,8 +879,10 @@
           }}
         \end{figure}
         \begin{figure}
-          \includegraphics[width=0.95\textwidth]{./img/hgate_hgate_histogram.pdf}
+          \includegraphics[width=0.7\textwidth]{./img/hgate_hgate_histogram.pdf}
         \end{figure}
+
+        \item<+-> 同様に$H\ket{1} = \ket{-}$かつ$H\ket{-} = \ket{1}$となる
       \end{itemize}
     \end{column}
   \end{columns}
@@ -869,19 +891,23 @@
 \begin{frame}
   \frametitle{他の量子ゲート\ballcircle{1} --- $X$ゲート}
 
+  \pause
   \begin{columns}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item $X$ゲートは図\ref{fig:x_gate_center}の$X$軸を中心に
+        \item<+-> $X$ゲートは図\ref{fig:x_gate_center}の$X$軸を中心に
         $\pi$回転させるゲート
-
-        \item したがって次がなりたつ
         \begin{align*}
-          X\ket{0} &= \ket{1} \\
-          X\ket{1} &= \ket{0}
+          X\ket{0} = \ket{1}, X\ket{1} = \ket{0}
         \end{align*}
 
-        \item 古典コンピュータの\texttt{NOT}ゲートと似ている
+        \item<+-> 古典コンピュータの\texttt{NOT}ゲートと似ている
+
+        \item<+-> $X$上の$\ket{\pm}$に$X$ゲートを作用させても
+        何も起きない
+        \[
+          X\ket{\pm} = \ket{\pm}
+        \]
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
@@ -923,25 +949,27 @@
 \begin{frame}
   \frametitle{他の量子ゲート\ballcircle{2} --- $Z$, $S$ゲート}
 
+  \pause
   \begin{columns}
     \begin{column}{0.6\textwidth}
       \begin{itemize}
-        \item $Z$ゲートは図\ref{fig:z_gate_center}の$Z$軸を中心に
-        $\pi$回転させるゲート
+        \item<+-> $Z$ゲートは図\ref{fig:z_gate_center}の$Z$軸を中心に$\pi$回転させる
 
-        \item $S$ゲートは$Z$軸を中心に$\frac{\pi}{2}$回転させるゲート
-
-        \item 次がなりたつ
+        \item<+-> $S$ゲートは$Z$軸を中心に$\frac{\pi}{2}$回転させる
         \begin{align*}
-          Z\ket{+} &= \ket{-} \\
-          Z\ket{-} &= \ket{+} \\
-          SS\ket{+} &= Z\ket{+} = \ket{-}
+          Z\ket{+} = \ket{-}, Z\ket{-} = \ket{+}, SS\ket{+} = Z\ket{+} = \ket{-}
         \end{align*}
 
-        \item $S\ket{\pm}$は$\left\{\ket{0}, \ket{1}\right\}$で次のように表現できる
+        \item<+-> $S\ket{\pm}$は$\left\{\ket{0}, \ket{1}\right\}$で次のように表現できる
         \begin{align*}
           S\ket{\pm} = \frac{1}{\sqrt{2}}\left(\ket{0} \pm i\ket{1}\right)
         \end{align*}
+
+        \item<+-> $Z$上の$\ket{0}, \ket{1}$に$Z, S$ゲートを作用させても
+        何も起きない
+        \[
+          Z\ket{0} = \ket{0}, S\ket{1} = \ket{1}
+        \]
       \end{itemize}
     \end{column}
     \begin{column}{0.4\textwidth}
@@ -988,35 +1016,38 @@
   \frametitle{2量子ビットゲート}
 
   \begin{itemize}
-    \item ここまでは1量子ビットゲートの話だった
+    \item<+-> ここまでは次のような1量子ビットに対する量子ゲートを扱った
+    \begin{itemize}
+      \item $H$ゲート
+      \item $X$ゲート
+      \item $Z$ゲート
+      \item $S$ゲート
+    \end{itemize}
 
-    \item 古典コンピュータの\texttt{NAND}ゲートのように、
+    \item<+-> 古典コンピュータの\texttt{NAND}ゲートのように、
     量子コンピュータにも2量子ビットを入力に持つゲートが存在する
-    %\begin{itemize}
-    %  \item ただし\texttt{NAND}ゲートは2入力1出力のように
-    %  出力が入力よりも少ない（非可逆）となっているが、
-    %  量子コンピュータのゲートは可逆性が要請されているので
-    %  入力と出力が常に同じ数となる
-    %\end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{$CZ$ゲート}
 
+  \pause
   \begin{itemize}
-    \item $CZ$ゲートは2量子ビットを引数にとり
+    \item<+-> $CZ$ゲートは2量子ビットを入力に持ち、
     \begin{enumerate}
       \item 1量子ビット目が$\ket{0}$であれば何もせず、
       \item 一方で1量子ビット目が$\ket{1}$であれば2量子ビット目に$Z$ゲートを作用させる
     \end{enumerate}
   \end{itemize}
 
+  \pause
   \bobcallout{+}{1量子ビット目が$\ket{+}$だったら？}
 
+  \pause
   \alicecallout{-}{%
     \begin{minipage}{0.8\textwidth}
-      1量子ビット目を測定して、
+      1量子ビット目を測定した結果、
       \begin{description}
         \item[$\ket{0}$が観測される] なにも起きない
         \item[$\ket{1}$が観測される] 2量子ビット目に$Z$ゲートが作用する
@@ -1029,18 +1060,17 @@
   \frametitle{$CZ$ゲート}
 
   \begin{columns}
-    \begin{column}{0.4\textwidth}
+    \begin{column}{0.5\textwidth}
       \begin{itemize}
         \item $CZ$ゲートを次のような量子回路\ref{fig:cz_gate}で確認してみる
       \end{itemize}
     \end{column}
-    \begin{column}{0.4\textwidth}
+    \begin{column}{0.47\textwidth}
       \begin{figure}
-        \centering
         \scalebox{1.0}{
         \Qcircuit @C=1.0em @R=0.2em @!R {
           \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \meter \\
-          \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \gate{H} & \meter
+          \lstick{\ket{0}_2} & \gate{H\ballref{enum:cz_gate_1}} & \gate{Z\ballref{enum:cz_gate_2}} & \gate{H\ballref{enum:cz_gate_3}} & \meter
         }}
         \caption{$CZ$ゲートを用いた回路}
         \label{fig:cz_gate}
@@ -1048,21 +1078,21 @@
     \end{column}
   \end{columns}
 
+  \pause
   \begin{itemize}
     \item 2量子ビット目の$\ket{0}_2$について考えると
     \begin{enumerate}
-      \item $H$ゲートにより$\ket{+}$となる
+      \item $H$ゲートにより$\ket{+}$となる \label{enum:cz_gate_1}
 
       \item $CZ$ゲートによって、$Z$ゲートが作用しなければ$\ket{+}$のままであり、
-      $Z$ゲートが作用すれば$\ket{-}$となる
+      $Z$ゲートが作用すれば$\ket{-}$となる \label{enum:cz_gate_2}
 
       \item 最後に$H$ゲートを作用させるが、このとき
       $\ket{+}$であれば$H\ket{+} = \ket{0}$となり、
-      一方で$\ket{-}$であれば$H\ket{-} = \ket{1}$となる
+      一方で$\ket{-}$であれば$H\ket{-} = \ket{1}$となる \label{enum:cz_gate_3}
     \end{enumerate}
 
-    \item 1量子ビット目は$\ket{+}$なので、$\ket{0}, \ket{1}$のどちらかになるかは
-    それぞれ確率$\frac{1}{2}$となる
+    \item<+-> 1量子ビット目は$\ket{+}$なので、$\ket{0}, \ket{1}$のどちらかになるかは確率$\frac{1}{2}$となる
   \end{itemize}
 \end{frame}
 
@@ -1072,7 +1102,6 @@
   \begin{columns}
     \begin{column}{0.5\textwidth}
       \begin{figure}
-        \centering
         \scalebox{1.0}{
         \Qcircuit @C=1.0em @R=0.2em @!R {
           \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \meter \\
@@ -1081,15 +1110,17 @@
       \end{figure}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \bobcallout{-}{つまりまとめると……}
+      \bobcallout{-}{\ce{:point_left:}つまりまとめると……}
     \end{column}
   \end{columns}
 
+  \pause
   \begin{itemize}
     \item 確率$\frac{1}{2}$で1量子ビット目の測定結果が$\ket{0}$なら2量子ビット目も$\ket{0}$
     \item 確率$\frac{1}{2}$で1量子ビット目の測定結果が$\ket{1}$なら2量子ビット目も$\ket{1}$
   \end{itemize}
 
+  \pause
   \alicecallout{+}{シミュレーターでやってみる！}
 \end{frame}
 
@@ -1105,6 +1136,8 @@
       }
     \end{figure}
   \end{center}
+
+  \pause
   \begin{itemize}
     \item このように\ce{:point_up:}シミュレーション結果は$\ket{00}$か$\ket{11}$が$\frac{1}{2}$となる\ce{:person_gesturing_ok:}
   \end{itemize}
@@ -1113,10 +1146,11 @@
 \section{量子ゲートテレポーテーション}
 
 \begin{frame}
-  \frametitle{量子ゲートテレポーテーション}
+  \frametitle{$CZ$ゲート後の量子操作と測定}
 
+  \pause
   \begin{itemize}
-    \item 2つの量子ビットが$\ket{+}$のとき$CZ$ゲートの後で下記のような操作をする
+    \item 2つの量子ビットが$\ket{+}$のとき、$CZ$ゲートを用いた
     図\ref{fig:teleportation_circuit}の回路を考える
     \begin{enumerate}
       \item $Z$軸の回転ゲートを作用させ \label{enum:teleportation_1}
@@ -1133,9 +1167,15 @@
             \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{Z\ballref{enum:teleportation_1}} & \gate{H\ballref{enum:teleportation_2}} & \meter & \ballref{enum:teleportation_3} \\
             \lstick{\ket{0}_2} & \gate{H} & \gate{Z} & \qw & \meter
           }}
-          \caption{$CZ$ゲートとテレポーテーション回路}
+          \caption{$CZ$ゲートの後で$Z, H$ゲートを作用させ測定}
           \label{fig:teleportation_circuit}
         \end{figure}
+
+        \pause
+        \bobcallout{-}{%
+          1量子ビット目は常に$\ket{1}$では？\ce{:thinking:}\\
+          $HZH\ket{0}_1 = HZ\ket{+}_1 = H\ket{-}_1 = \ket{1}_1$
+        }
       \end{column}
       \begin{column}{0.4\textwidth}
         \begin{figure}
@@ -1169,7 +1209,8 @@
   \end{columns}
 
   \begin{itemize}
-    \item 下記のように$Z$ゲートと$H$ゲートが2量子ビット目へテレポートする
+    \item 図\ref{fig:teleportation_0},\ref{fig:teleportation_1}のように
+    $Z,H$ゲートが2量子ビット目へ\textbf{テレポーテーション}する
     \begin{itemize}
       \item 1量子ビット目の測定結果に応じて$X$ゲートの有無の差がある
     \end{itemize}
@@ -1183,6 +1224,7 @@
           \lstick{\ket{0}_2} & \gate{H} & \gate{Z\ballref{enum:teleportation_1}} & \gate{H\ballref{enum:teleportation_2}} & \meter
         }}
         \caption{1量子ビット目の測定結果が$0$}
+        \label{fig:teleportation_0}
       \end{figure}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -1192,16 +1234,25 @@
           \lstick{\ket{0}_2} & \gate{H} & \gate{Z\ballref{enum:teleportation_1}} & \gate{H\ballref{enum:teleportation_2}} & \gate{X} & \meter
         }}
         \caption{1量子ビット目の測定結果が$1$}
+        \label{fig:teleportation_1}
       \end{figure}
     \end{column}
   \end{columns}
+  
+  \pause
+  \begin{itemize}
+    \item $Z$軸上の回転ゲートである$S$ゲートもテレポーテーションできる
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{量子ゲートテレポーテーション}
 
   \begin{itemize}
-    \item テレポートなので1量子ビット目からは$Z, H$ゲートが消えてしまう
+    \item テレポーテーションなので1量子ビット目から$Z, H$ゲートが\textbf{消える}
+    \begin{itemize}
+      \item テレポーテーションであってコピーではない
+    \end{itemize}
   \end{itemize}
 
   \begin{columns}
@@ -1225,12 +1276,25 @@
     \end{column}
   \end{columns}
 
+  \pause
   \begin{itemize}
-    \item 1量子ビット目は$H$ゲートが2回作用しているので、$CZ$ゲートがなければキャンセルして常に$\ket{0}$となるが、
-    シミュレーション結果の図\ref{fig:h_gate_teleportation_histogram}では1量子ビット目は$\ket{0},\ket{1}$がランダムとなっている
-  \end{itemize}
+    \item 1量子ビット目は$H$ゲートが2回作用しているので、$CZ$ゲートがなければキャンセルして常に$\ket{0}$となる
 
-  \simplecallout{-}{green!10}{量子コンピュータでは量子操作をテレポートさせることができる！}    
+    \item しかし図\ref{fig:h_gate_teleportation_histogram}では
+    1量子ビット目が$\ket{0},\ket{1}$のランダムとなっている
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{量子ゲートテレポーテーション}
+
+  \alicecallout{-}{$CZ$ゲートで$Z, S, H$ゲートをテレポーテーションできる！}    
+
+  \pause
+  \bobcallout{+}{そんなことある？\ce{:thinking:}}
+
+  \pause
+  \alicecallout{-}{量子コンピュータ（= 宇宙？）はこういうもの！}
 \end{frame}
 
 \section{Quantum Covert Lottery}
