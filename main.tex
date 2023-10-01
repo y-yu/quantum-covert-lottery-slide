@@ -1310,14 +1310,15 @@
     \end{column}
     \begin{column}{0.45\textwidth}
       \begin{itemize}
-        \item 量子コンピュータではもっと色々なゲートがあるが、
-        とりあえず量子コンピュータ上でCovert LotteryをやるにはここまでのゲートでOK\ce{:person_gesturing_ok:}
+        \item<+-> もっと色々な量子ゲートがある
+
+        \item<+-> 量子コンピュータ上のCovert Lotteryの説明はここまでの量子ゲートでOK\ce{:person_gesturing_ok:}
         \begin{itemize}
           \item $X, S, Z, H$ゲート
           \item $CZ$ゲート
         \end{itemize}
         
-        \item ここからはこれまで説明した量子ゲートと量子ゲートテレポーテーションで``Quantum Covert Lottery''を作っていく
+        \item<+-> シュレディンガーの猫と量子ゲートテレポーテーションで``Quantum Covert Lottery''を作っていく
       \end{itemize}
     \end{column}
   \end{columns}
@@ -1335,79 +1336,80 @@
 \begin{frame}
   \frametitle{プロトコル}
 
+  \pause
   \begin{enumerate}
-    \item アリスは表\ref{tbl:covert_meaning}にしたがって希望$a \in \{0, 1\}$と、
+    \item<+-> アリスは表\ref{tbl:covert_meaning}にしたがって希望$a \in \{0, 1\}$と、
     乱数$x \in \{0, 1\}$を生成する
 
-    \item アリスは次のような回路\ref{fig:alice_circuit}で表現される3量子ビットを用意する
+    \item<+-> アリスは次のような回路\ref{fig:alice_circuit}で表現される3量子ビットを用意する
     \begin{itemize}
       \item $a = 1$であれば、1量子ビット目に$S$ゲートを作用させる
       \item $x = 1$であれば、3量子ビット目に$Z$ゲートを作用させる
     \end{itemize}
+    \label{enum:alice_s_z_gate}
 
-    \item 3量子ビットを量子通信回線でボブへ送信する
+    \item<+-> 3量子ビットを量子通信回線でボブへ送信する
   \end{enumerate}
 
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \begin{figure}
-        \centering
-        \scalebox{1.0}{
-        \Qcircuit @C=1.0em @R=0.2em @!R {
-          \lstick{a}         & \cw      & \cw             & \control\cw \\
-          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}        & \gate{S}\cwx & \qw      & \qw\\
-          \lstick{\ket{0}_2} & \gate{H} & \gate{Z}        & \ctrl{1}     & \qw      & \qw\\
-          \lstick{\ket{0}_3} & \gate{H} & \gate{Z}\cwx[1] & \gate{Z}     & \gate{H} & \qw \\
-          \lstick{x}         & \cw      & \control\cw
-        }}
-        \caption{アリスの用意する3量子ビット}
-        \label{fig:alice_circuit}
-      \end{figure}
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      \begin{table}[h]
-        \caption{希望の意味}
-        \label{tbl:covert_meaning}
-        \CovertTable
-      \end{table}
-    \end{column}
-  \end{columns}
+  \uncover<1->{
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+        \begin{figure}
+          \centering
+          \scalebox{0.8}{
+          \Qcircuit @C=1.0em @R=0.2em @!R {
+            \lstick{a}         & \cw      & \cw             & \control\cw \\
+            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}        & \gate{S\ballref{enum:alice_s_z_gate}}\cwx & \qw      & \qw\\
+            \lstick{\ket{0}_2} & \gate{H} & \gate{Z}        & \ctrl{1}     & \qw      & \qw\\
+            \lstick{\ket{0}_3} & \gate{H} & \gate{Z\ballref{enum:alice_s_z_gate}}\cwx[1] & \gate{Z}     & \gate{H} & \qw \\
+            \lstick{x}         & \cw      & \control\cw
+          }}
+          \caption{アリスの用意する3量子ビット}
+          \label{fig:alice_circuit}
+        \end{figure}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \begin{table}[h]
+          \caption{希望の意味}
+          \label{tbl:covert_meaning}
+          \CovertTable
+        \end{table}
+      \end{column}
+    \end{columns}
+  }
 \end{frame}
 
 \begin{frame}
   \frametitle{プロトコル}
 
-  \begin{columns}
-    \begin{column}{0.6\textwidth}
-      \begin{enumerate}
-        \item ボブはアリスから3量子ビットを受けとる
-        
-        \item ボブは希望$b \in \{0, 1\}$を選び図\ref{fig:bob_circuit}のような量子操作を行う
-        \begin{itemize}
-          \item $b = 1$であれば、1量子ビット目に$S$ゲートを作用させる
-        \end{itemize}
+  \begin{enumerate}
+    \setcounter{enumi}{3}
 
-        \item ボブは1量子ビット目に$H$ゲートを作用させたあと測定を行う
-      \end{enumerate}
-    \end{column}
-    \begin{column}{0.4\textwidth}
-      \begin{table}[h]
-        \CovertTable
-      \end{table}
-    \end{column}
-  \end{columns}
+    \item<+-> ボブはアリスから3量子ビットを受けとる
+    
+    \item<+-> ボブは希望$b \in \{0, 1\}$を選び図\ref{fig:bob_circuit}のような量子操作を行う
+    \begin{itemize}
+      \item $b = 1$であれば1量子ビット目に$S$ゲートを作用させる
+    \end{itemize}
+    \label{enum:bob_s_gate}
 
-  \begin{figure}
-    \scalebox{1.0}{
-      \Qcircuit @C=1.0em @R=0.2em @!R {
-        \lstick{b}         & \cw      & \cw       & \cw        & \control\cw \\
-        \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}  & \gate{S^?} & \gate{S}\cwx & \gate{H} & \meter \\%& \control \cw \\
-        \lstick{\ket{0}_2} & \gate{H} & \gate{Z}  & \ctrl{1}   & \qw          & \qw    \\%& \gate{X}\cwx & \meter \\
-        \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \gate{Z}  & \gate{H}     & \qw    %& \gate{X}\cwx
-    }}%
-    \caption{ボブが行う量子操作}
-    \label{fig:bob_circuit}
-  \end{figure}
+    \item ボブは1量子ビット目に$H$ゲートを作用させる
+    \label{enum:bob_h_gate}
+  \end{enumerate}
+
+  \uncover<2->{
+    \begin{figure}
+      \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{b}         & \cw      & \cw       & \cw        & \control\cw \\
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}  & \gate{S^?} & \gate{S\ballref{enum:bob_s_gate}}\cwx & \gate{H\ballref{enum:bob_h_gate}} & \qw \\%& \control \cw \\
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z}  & \ctrl{1}   & \qw          & \qw    \\%& \gate{X}\cwx & \meter \\
+          \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \gate{Z}  & \gate{H}     & \qw    %& \gate{X}\cwx
+      }}%
+      \caption{ボブが行う量子操作}
+      \label{fig:bob_circuit}
+    \end{figure}
+  }
 \end{frame}
 
 \begin{frame}
@@ -1418,12 +1420,14 @@
       \bobcallout{-}{これどういうこと？}    
     \end{column}
     \begin{column}{0.5\textwidth}
-      \alicecallout{+}{まずは$\ket{0}_1$だけ整理してみる}
+      \pause
+      \alicecallout{+}{1量子ビット目だけ整理してみる}
     \end{column}
   \end{columns}
 
+  \pause
   \begin{itemize}
-    \item 1量子ビット目とアリス・ボブの希望に注目すると図\ref{fig:1st_qubit}のようになる
+    \item 1量子ビット目とアリス・ボブの希望に注目すると図\ref{fig:1st_qubit}の回路になる
     \begin{figure}
       \centering
       \scalebox{1.0}{
@@ -1432,11 +1436,11 @@
         \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}     & \gate{S}\cwx & \gate{S}\cwx[1] & \gate{H} & \meter \\
         \lstick{b}         & \cw      & \cw          & \cw          & \control\cw
       }}
-      \caption{1量子ビット目とアリス・ボブの希望}
+      \caption{1量子ビット目とアリス・ボブの希望$a, b$}
       \label{fig:1st_qubit}
     \end{figure}
 
-    \item これをアリス・ボブの希望$a, b$で場合わけして考える
+    \item<+-> これをアリス・ボブの希望$a, b$で場合わけして考える
   \end{itemize}
 \end{frame}
 
@@ -1444,48 +1448,51 @@
   \frametitle{ケーススタディ\ballcircle{1} --- アリス・ボブの希望が一致}
 
   \begin{itemize}
-    \item アリス・ボブの希望が一致するときというのは$a = b$なので次のようになる
-    \begin{columns}
-      \begin{column}{0.5\textwidth}
-        \begin{figure}
-          \centering
-          \scalebox{1.0}{
-          \Qcircuit @C=1.0em @R=0.2em @!R {
-            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}    & \gate{H} & \meter \\
-                               &          &
-          }}
-          \vspace{2ex}
-          \caption{両者がボブの奢り$a = 0$で一致}
-          \label{fig:a_equal_0}
-        \end{figure}
-      \end{column}
-      \begin{column}{0.5\textwidth}
-        \begin{figure}
-          \centering
-          \scalebox{1.0}{
-          \Qcircuit @C=1.0em @R=0.2em @!R {
-            \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{S} & \gate{S} & \gate{H} & \meter \\
-                               &          &
-          }}
-          \caption{両者が割り勘$a = 1$で一致}
-          \label{fig:a_equal_1}
-        \end{figure}
-      \end{column}
-    \end{columns}
+    \item アリス・ボブの希望が一致するときは$a = b$なので次の2つになる
+  \end{itemize}
 
-    \item $SS = Z$により、次のように2量子ビット目へテレポートするゲートが決まる
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}    & \gate{H} & \meter \\
+                              &          &
+        }}
+        \caption{両者がボブの奢り（$0$）で一致}
+        \label{fig:a_equal_0}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1} & \gate{S} & \gate{S} & \gate{H} & \meter \\
+                              &          &
+        }}
+        \caption{両者が割り勘（$1$）で一致}
+        \label{fig:a_equal_1}
+      \end{figure}
+    \end{column}
+  \end{columns}
+
+  \pause
+  \begin{itemize}
+    \item $SS = Z$により、2量子ビット目へのテレポーテーション内容は次のようになる
     \begin{description}
       \item[$a = b = 0$] $H$ゲート（+ $X$ゲート）
       \item[$a = b = 1$] $H$ゲートと$Z$ゲート（+ $X$ゲート）
     \end{description}
   \end{itemize}
 
-  \alicecallout{-}{$S$ゲートが消えているのがポイント！}  
+  \pause
+  \alicecallout{-}{$S$ゲートがテレポーテーションしないのがポイント！}  
 \end{frame}
 
 \begin{frame}
   \frametitle{ケーススタディ\ballcircle{2} --- アリス・ボブの希望が不一致}
 
+  \pause
   \begin{itemize}
     \item 一方で、アリス・ボブの希望が一致しないのは$a \ne b$なので次のようになる
     \begin{figure}
@@ -1498,9 +1505,10 @@
       \label{fig:a_eq_1_b_eq_0}
     \end{figure}
   
-    \item いずれも$S$ゲートと$H$ゲートが2量子ビット目へテレポートする
+    \item<+-> いずれも$S$ゲートと$H$ゲートが2量子ビット目へテレポートする
   \end{itemize}
 
+  \pause
   \bobcallout{+}{$S$ゲートが2量子ビット目へテレポートされる！}
 \end{frame}
 
@@ -1508,17 +1516,18 @@
   \frametitle{プロトコル}
 
   \begin{enumerate}
-    \item ボブは1量子ビット目の測定を行い測定結果を$c_1$とする
+    \setcounter{enumi}{6}
+
+    \item<+-> ボブは1量子ビット目の測定を行い測定結果を$c_1$とする
     \begin{figure}
       \scalebox{1.0}{
         \Qcircuit @C=1.0em @R=0.2em @!R {
-          \lstick{b}         & \cw      & \cw       & \cw       & \control\cw \\
-          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}  & \gate{S^?} & \gate{S}\cwx & \gate{H} & \meter & \rstick{\rightarrow c_1} \\
+          \lstick{\ket{0}_1} & \gate{H} & \ctrl{1}  & \gate{S^?} & \gate{S^?} & \gate{H} & \meter & \rstick{\rightarrow c_1} \\
                              &          & 
       }}%
     \end{figure}
 
-    \item ボブは測定結果$c_1$に応じて次のように$X$ゲートを作用させる
+    \item<+-> ボブは$c_1$に応じて次のように$X$ゲートを2,3量子ビット目に作用させる
     \begin{columns}
       \begin{column}{0.4\textwidth}
         \begin{figure}
@@ -1538,70 +1547,94 @@
         \end{description}
       \end{column}
     \end{columns}
-    \begin{itemize}
-      \item 量子ゲートテレポーテーションによって偶発的に生じる$X$ゲートを相殺する
-    \end{itemize}
   \end{enumerate}
+
+  \pause
+  \bobcallout{+}{量子ゲートテレポーテーションで偶発的に生じる$X$ゲートをキャンセル！}
 \end{frame}
 
 \begin{frame}
   \frametitle{プロトコル}
 
   \begin{enumerate}
-    \item ボブは2量子ビット目の測定を行い結果を$c_2$としてプロトコルの結果としてアリスへ共有する
-  \end{enumerate}
+    \setcounter{enumi}{8}
 
-  \alicecallout{-}{2, 3量子ビット目は$a, b$で次のように場合わけされる}  
-
-  \begin{description}
-    \item[$a = b = 0$のとき]\mbox{}
+    \item<+-> ボブは2量子ビット目の測定を行い結果を$c_2$とする
     \begin{figure}
       \scalebox{1.0}{
         \Qcircuit @C=1.0em @R=0.2em @!R {
-          \lstick{\ket{0}_2} & \gate{H} & \gate{H}   & \ctrl{1}  & \meter   & \rstick{\rightarrow c_2}\\
-          \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \gate{Z}  & \gate{H} & \qw 
+                             &          &                   & \\
+          \lstick{\ket{0}_2} & \gate{H} & \gate{Z}\qwx[-1]  & \ctrl{1}  & \meter & \rstick{\rightarrow c_2}\\
+                             &          &                   &
         }}
     \end{figure}
-  
-    \begin{itemize}
-      \item $H$ゲートの相殺により2量子ビット目は$\ket{0}$に確定し$c_2 = 0$\ce{:person_gesturing_ok:}
-    \end{itemize}
-  \end{description}
+    
+    \item<+-> プロトコルの結果として$c_2$をアリスへ共有する
+  \end{enumerate}
+
+  \pause
+  \alicecallout{-}{2, 3量子ビット目は希望$a, b$で場合わけ}
 \end{frame}
 
 \begin{frame}
-  \frametitle{プロトコル}
+  \frametitle{\ballcircle{i} $a = b = 0$のとき}
 
-  \begin{description}
-    \item[$a = b = 1$のとき]\mbox{}
-    \begin{figure}
-      \scalebox{1.0}{
-        \Qcircuit @C=1.0em @R=0.2em @!R {
-          \lstick{\ket{0}_2} & \gate{H} & \gate{Z}   & \gate{H} & \ctrl{1}  & \meter   & \rstick{\rightarrow c_2} \\
-          \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \qw      & \gate{Z}  & \gate{H} & \qw
-        }}
-    \end{figure}
+  \begin{figure}
+    \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{\ket{0}_2} & \gate{H} & \gate{H}   & \ctrl{1}  & \meter   & \rstick{\rightarrow c_2}\\
+        \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \gate{Z}  & \gate{H} & \qw 
+      }}
+  \end{figure}
+
+  \begin{itemize}
+    \item<+-> $H$ゲートの相殺により2量子ビット目は$\ket{0}$に確定し$c_2 = 0$となる
+    
+    \item<+-> アリス・ボブの両方が「ボブの奢り」である$0$を希望しているため、
+    プロトコルの結果として$0$となりOK\ce{:person_gesturing_ok:}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\ballcircle{ii} $a = b = 1$のとき}
+
+  \begin{figure}
+    \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{\ket{0}_2} & \gate{H} & \gate{Z}   & \gate{H} & \ctrl{1}  & \meter   & \rstick{\rightarrow c_2} \\
+        \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \qw      & \gate{Z}  & \gate{H} & \qw
+      }}
+  \end{figure}
+
+  \begin{itemize}
+    \item<+-> $H,Z,H$ゲート操作で2量子ビット目は$\ket{1}$に確定し$c_2 = 1$となる
+
+    \item<+-> アリス・ボブの両方が「割り勘」である$1$を希望しているため、
+    プロトコルの結果として$1$となりOK\ce{:person_gesturing_ok:}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\ballcircle{iii} $a \ne b$のとき}
+
+  \begin{figure}
+    \scalebox{1.0}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+        \lstick{\ket{0}_2} & \gate{H} & \gate{S}   & \gate{H} & \ctrl{1} & \meter   & \rstick{\rightarrow c_2} \\
+        \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \qw      & \gate{Z} & \gate{H} & \qw 
+      }}
+  \end{figure}
+
+  \begin{itemize}
+    \item<+-> $H,S,H$ゲート操作で2量子ビット目は$S\ket{-}$となる
     \begin{itemize}
-      \item $H,Z,H$ゲート操作で2量子ビット目は$\ket{1}$に確定し$c_2 = 1$\ce{:person_gesturing_ok:}
+      \item $S\ket{-}$はブロッホ球の赤道上なので、測定結果は$\ket{0}, \ket{1}$が$\frac{1}{2}$となる
     \end{itemize}
 
-    \item[$a \ne b$のとき]\mbox{}
-    \begin{figure}
-      \scalebox{1.0}{
-        \Qcircuit @C=1.0em @R=0.2em @!R {
-          \lstick{\ket{0}_2} & \gate{H} & \gate{S}   & \gate{H} & \ctrl{1} & \meter   & \rstick{\rightarrow c_2} \\
-          \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \qw      & \gate{Z} & \gate{H} & \qw 
-        }}
-    \end{figure}
-    \begin{itemize}
-      \item $H,S,H$ゲート操作で2量子ビット目は$S\ket{-}$となる
-      \begin{itemize}
-        \item $S\ket{-}$はブロッホ球の赤道上なので、測定結果は$\ket{0}, \ket{1}$が$\frac{1}{2}$となる
-      \end{itemize}
+    \item<+-> したがって$c_2$は$\ket{0}, \ket{1}$が50\%ランダムになる
 
-      \item したがって$c_2$は$\ket{0}, \ket{1}$が50\%ランダムになる
-    \end{itemize}
-  \end{description}
+    \item<+-> アリス・ボブの希望が割れた場合は結果が50\%のランダムとなりOK\ce{:person_gesturing_ok:}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -1617,21 +1650,52 @@
   \end{columns}
 
   \begin{enumerate}
+    \setcounter{enumi}{10}
+
     \item ボブは3量子ビット目を測定し$c_3$としアリスへ送信する
+    \begin{figure}
+      \scalebox{1.0}{
+        \Qcircuit @C=1.0em @R=0.2em @!R {
+                             &          &            &   \\
+          \lstick{\ket{0}_3} & \gate{H} & \gate{Z^?} & \gate{Z}\qwx[-1] & \gate{H} & \meter & \rstick{\rightarrow c_3} 
+        }}
+    \end{figure}
 
     \item アリスはボブから$c_2, c_3$を受け取り、式\ref{eq:alice_check}を確認する
     \begin{align}
       c_2\; \mathtt{XOR}\; x \stackrel{?}{=} c_3 \label{eq:alice_check}
     \end{align}
-
-    \begin{itemize}
-      \item アリスとボブの希望が衝突した場合、ボブは自分に都合がいい$c_2$が観測されたと偽ることができる\ce{:smiling_imp:}
-
-      \item ボブが正しく測定をしなかった場合$\frac{1}{2}$の確率でアリスはそれを検知できる
-
-      \item 検証用の量子ビットを$n$ qubit用意すれば$\frac{1}{2^n}$でボブの不正を検知できる
-    \end{itemize}
   \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{ボブの不正検知}
+
+  \pause
+  \begin{itemize}
+    \item<+-> 二人の希望が衝突した場合、ボブは自分に都合がいい$c_2$が観測されたと偽ることができる\ce{:smiling_imp:}
+
+    \item<+-> ボブが正しく測定をしなかった場合$\frac{1}{2}$の確率でアリスはそれを検知できる
+
+    \item<+-> 検証用の量子ビットを$n$ qubit用意すれば$\frac{1}{2^n}$でボブの不正を困難にできる
+    \begin{itemize}
+      \item 図\ref{fig:bob_cheat_detection}の回路ではボブは$x_1, x_2, x_3$の3bitを
+      全てあてなければ不正に成功しない
+    \end{itemize}
+  \end{itemize}
+
+  \begin{figure}
+    \scalebox{0.8}{
+      \Qcircuit @C=1.0em @R=0.2em @!R {
+                           &          &                &                  &                  &          &     &  \\ 
+        \lstick{\ket{0}_2} & \gate{H} & \qw            & \gate{Z}\qwx[-1] & \ctrl{1}         & \qw      & \qw & \gate{X}\cwx[-1] & \meter \\
+        \lstick{\ket{0}_3} & \gate{H} & \gate{Z^{x_1}} & \qw              & \gate{Z}\ctrl{1} & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_3}\\
+        \lstick{\ket{0}_4} & \gate{H} & \gate{Z^{x_2}} & \qw              & \gate{Z}\ctrl{1} & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_4}\\
+        \lstick{\ket{0}_4} & \gate{H} & \gate{Z^{x_3}} & \qw              & \gate{Z}         & \gate{H} & \qw & \gate{X}\cwx[-1] & \meter & \rstick{\rightarrow c_5}\\
+      }}
+    \caption{ボブの不正対策を増やした回路}
+    \label{fig:bob_cheat_detection}
+  \end{figure}
 \end{frame}
 
 % \begin{frame}
@@ -1664,14 +1728,16 @@
 
     \item<+-> 量子コンピュータには高速な素因数分解といったアルゴリズム高速化以外にも
     色々な応用の可能性があると思う
+    \begin{itemize}
+      \item シュレディンガーの猫や量子ゲートテレポーテーションはそれだけで夢がある
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \section*{参考文献}
 \begin{frame}[allowframebreaks]
-  \frametitle{参考文献}%
-
-  \nocite{*}
+  \frametitle{参考文献}
+  %\nocite{*}
   \bibliographystyle{junsrt_url}
   \bibliography{ref}
 \end{frame}
