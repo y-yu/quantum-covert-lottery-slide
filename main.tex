@@ -789,7 +789,7 @@
 }
 
 \begin{frame}
-  \frametitle{1量子ビットのシミュレータ実験}
+  \frametitle{シュレディンガーの猫のシミュレータ実験}
 
   \pause
   \begin{columns}
@@ -826,7 +826,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1量子ビットのシミュレータ実験}
+  \frametitle{シュレディンガーの猫のシミュレータ実験}
 
   \begin{columns}
     \begin{column}{0.5\textwidth}
@@ -861,7 +861,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{1量子ビットのシミュレータ実験}
+  \frametitle{シュレディンガーの猫のシミュレータ実験}
 
   \begin{columns}
     \begin{column}{0.4\textwidth}
@@ -1681,7 +1681,7 @@
 
     \item<+-> 式\ref{eq:alice_check}により、アリスは確率$\frac{1}{2}$でボブの不正を検知できる
 
-    \item<+-> 検証用の量子ビットを$n$ qubit用意すれば$\frac{1}{2^n}$でボブの不正を困難にできる
+    \item<+-> 検証用の量子ビットを$n$ qubit用意すれば、ボブの不正の可能性を$\frac{1}{2^n}$にできる
     \begin{itemize}
       \item 図\ref{fig:bob_cheat_detection}の回路ではボブは$x_1, x_2, x_3$の3bitを
       全てあてなければ不正に成功しない
@@ -1731,7 +1731,7 @@
       ボブの不正対策がない\ce{:innocent:}
     \end{itemize}
 
-    \item<+-> ボブは困難とはいえ不正ができるが、アリスの不正が今のところない。
+    \item<+-> ボブは困難とはいえ不正ができるが、アリスの不正が今のところない
     \begin{itemize} 
       \item アリスもボブと全く同じ困難性で不正ができるようにしたい
     \end{itemize}
@@ -1760,6 +1760,47 @@
 \begin{frame}
   \centering
   {\Huge Thank you for the attention!}
+\end{frame}
+
+\appendix
+
+\begin{frame}
+  \frametitle{\appendixname}
+
+  \tableofcontents
+\end{frame}
+
+\section{量子ゲートの行列表現}
+\begin{frame}
+  \frametitle{量子ゲートの行列表現}
+
+  \centering
+  \[
+    X := \left(\begin{array}{cc}
+      0 & 1 \\
+      1 & 0 \\
+    \end{array}\right),\;
+    Z := \left(\begin{array}{cc}
+      1 & 0 \\
+      0 & -1 \\
+    \end{array}\right),\;
+    S := \left(\begin{array}{cc}
+      1 & 0 \\
+      0 & \sqrt{-1} \\
+    \end{array}\right),\;
+    H := \frac{1}{\sqrt{2}}\left(\begin{array}{cc}
+      1 & 1 \\
+      1 & -1 \\
+    \end{array}\right)
+  \]
+  \[
+    CZ := \left(\begin{array}{cccc}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0  \\
+      0 & 0 & 1 & 0  \\
+      0 & 0 & 0 & -1  \\
+    \end{array}\right)
+  \]
 \end{frame}
 
 \end{document}
