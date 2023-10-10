@@ -3,5 +3,5 @@ Quantum Covert Lottery
 
 ## PDF
 
-- [Slide](https://y-yu.github.io/fair-or-all-slide/fair_or_all.pdf)
-- [Handout](https://y-yu.github.io/fair-or-all-slide/fair_or_all_without_animation.pdf)
+- [Slide](https://y-yu.github.io/quantum-covert-lottery-slide/quantum_covert_lottery.pdf)
+- [Handout](https://y-yu.github.io/quantum-covert-lottery-slide/quantum_covert_lottery_without_animation.pdf)
